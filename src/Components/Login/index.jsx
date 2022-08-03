@@ -49,7 +49,7 @@ const Span = styled.span`
 
 const Login = () => {
   const navigate = useNavigate()
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const { register, handleSubmit, undefined, formState: { errors } } = useForm()
   const [loginError, setLoginError] = useState()
 
   const onSubmit = data => {
@@ -66,7 +66,7 @@ const Login = () => {
       })
 
       .catch((error) => {
-        const errorCode = error.code;
+        //const errorCode = error.code;
         const errorMessage = error.message;
         setLoginError(error.message)
       });

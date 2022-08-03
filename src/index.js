@@ -11,6 +11,7 @@ import Login from './Components/Login'
 import { GlobalStyle } from './Components/globalStyle'
 import Dasboard from './Components/Dasboard'
 import UserIndicators from './Components/UserIndicators'
+import Activities from './Components/Activities'
 
 // Initialize Firebase
 const appFire = initializeApp(firebaseConfig)
@@ -19,6 +20,7 @@ const analytics = getAnalytics(appFire)
 // Initialize React
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const history = createBrowserHistory({ window })
+
 
 root.render(
   <React.StrictMode>
@@ -32,6 +34,8 @@ root.render(
       <Route path="/dashboard" element={ <LockedRoute child={<Dasboard />}/> }/>
 
       <Route path="/userindicators" element={ <LockedRoute child={<UserIndicators />}/> }/>
+     
+      <Route path="/activities" element={ <LockedRoute child={<Activities />}/> }/>
 
       <Route path="*" element={<Login />} />
 

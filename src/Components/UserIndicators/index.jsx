@@ -40,7 +40,8 @@ const UserIndicators = () => {
   useEffect(() => {
     listUserIndicators()
   }, [])
-
+  
+  console.log(watch)
 
   function addIndicator (data) {
 
@@ -69,7 +70,7 @@ const UserIndicators = () => {
     updateIndicator(useIndicators[idx].userIndicator)
       .then(res => (
         setUseIndicators(
-          useIndicators.filter(item => item.userIndicator != useIndicators[idx].userIndicator)
+          useIndicators.filter(item => item.userIndicator !== useIndicators[idx].userIndicator)
         )
       ))
   }
@@ -92,7 +93,7 @@ const UserIndicators = () => {
         <Box key={idx} positive={item.positive}  >
           {item.indicator}
 
-          <img onClick={() => deactivateIndicator(idx)} src={require("../../images/trash.png")} height="30px" width="30px" />
+          <img onClick={() => deactivateIndicator(idx)} src={require("../../images/trash.png")} height="30px" width="30px" alt="icon" />
 
         </Box>
 

@@ -9,11 +9,3 @@ export const GlobalStyle = createGlobalStyle`
   text-decoration: none;
 }
 `
-export const BodyCentralizedStyle = createGlobalStyle`
-html {
-  //display: flex;
-  //justify-content: center;
-  //background-color:  ${({theme}) => theme.body } ;
-
-}
-`

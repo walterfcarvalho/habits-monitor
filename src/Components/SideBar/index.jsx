@@ -56,6 +56,10 @@ const Menu = ({ open }) => {
         <span role="img" aria-label="My indicators"></span>
         My indicators
       </a>
+      <a href="" onClick={() => navigate("/activities")}  >
+        <span role="img" aria-label="My indicators"></span>
+        Activities
+      </a>
     </StyledMenu>
   )
 }

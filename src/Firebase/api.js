@@ -1,4 +1,4 @@
-import { getApp, initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 //import { collection, query, where, getDocs } from "firebase/firestore";
 import { firebaseConfig } from './config'
 import { getFirestore, collection, query, where, getDocs, Timestamp, doc, updateDoc, addDoc } from "firebase/firestore";
@@ -9,11 +9,8 @@ const db = getFirestore(app);
 // JqwqJNbHtfXocFRkpMfOhZBuo6T2
 
 export const addDocument = async (theCollection, obj) => {
-
   return  await addDoc(collection(db, theCollection), obj);
-
 }
-
 
 export const getUserIndicators = async (userId) => {
   const data = []
