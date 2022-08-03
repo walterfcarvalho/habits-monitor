@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Styled from 'styled-components'
+import styled from 'styled-components'
 import { getUserIndicators, getActivitysOfDay } from '../../Firebase/api'
 import TheChart from '../Chart'
 import { TailSpin } from 'react-loader-spinner'
@@ -8,20 +8,20 @@ import { lastSevenDays, theDate } from '../../util/dateTime'
 import  StyledHeader  from '../StyleHeader'
 import { Box } from '../UI'
 
-const Points = Styled.div`
+const Points = styled.div`
   background-color:white;
-  border:radius:10px;
+  border-radius:10px;
   margin: 5px 20px 5px 5px;
   padding: 2px;
   width:20%;
   text-align:center;
 `
-const ActList = Styled.div`
+const ActList = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
 `
-const Span = Styled.span`
+const Span = styled.span`
   width: 50%;
 `
 const Dasboard = () => {
@@ -80,7 +80,7 @@ const Dasboard = () => {
 
   return <>
 
-    <StyledHeader></StyledHeader>
+    <StyledHeader title={"Dashboard"}></StyledHeader>
 
     <ActList>
 
@@ -97,7 +97,6 @@ const Dasboard = () => {
         />
       }
 
-
       {incatorsWeek &&
         <TheChart
           data={incatorsWeek}
@@ -107,7 +106,7 @@ const Dasboard = () => {
         </TheChart>
       }
 
-      <> Today activities </>
+      <p> Today activities </p>
 
 
       {indicatorsByDay.length > 0 &&

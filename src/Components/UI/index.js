@@ -7,7 +7,6 @@ export const Icone = styled.img`
 export const IconeTema = styled(Icone)`
   filter: ${({theme}) => theme.filter };
 ` 
-
 export const Button = styled.button`
   margin: 15px auto 0px auto;
   display: block;
@@ -41,9 +40,9 @@ export const Box = styled.div`
   }
 `
 
-export const Detalhe = styled.span`
-  color: #41d3be;
-  font-size: 24px;
+export const FieldError = styled.span`
+  color: red;
+  font-size: 12px;
 `
 
 export const Saldo = styled.div`  
@@ -84,7 +83,7 @@ Label.displayName = "Label"
 export const BtnCabecalho =  styled.a`
   text-align: center;
   border-radius: 3px;
-  padding: 5px 20px;
+  padding: 5px 5px;
   margin: 0 10px;
   font-weight: 600;
   border: 2px solid white;
@@ -93,7 +92,7 @@ export const BtnCabecalho =  styled.a`
 `
 
 export const ActList = styled.div`
-display:flex;
-flex-direction: column;
-align-items: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 `

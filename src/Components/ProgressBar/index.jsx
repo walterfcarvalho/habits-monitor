@@ -4,14 +4,14 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Styled from "styled-components";
+import styled from "styled-components";
 
 
-const Span = Styled.span`
+const Span = styled.span`
   width: 10%;
   text-align:right;
   `
-const Container = Styled.div`
+const Container = styled.div`
   display:flex;
   flex-direction:row;
   justify-content:flex-end;

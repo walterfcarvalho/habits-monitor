@@ -8,12 +8,12 @@ const TheStyledHeader = styled.nav`
 background-color: ${corPrimaria};
 display: flex;
 justify-content: space-between;
-padding: 0 15vw;
-height: 10vh;
+padding: 0 1vw;
+height: 7vh;
 align-items: center;
 `
 
-const StyledHeader = () => {
+const StyledHeader = ({title}) => {
   let navigate = useNavigate()
 
   function logout() {
@@ -23,9 +23,9 @@ const StyledHeader = () => {
 
   return <TheStyledHeader id={'outer-container'} >
     <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'}></SideBar>
-    <h1>  Habit Monitor  </h1>
+    <h1>  {title}  </h1>
     
-    <BtnCabecalho onClick={()=>logout}   >
+    <BtnCabecalho onClick={logout}   >
       Logout
     </BtnCabecalho>
 
