@@ -60,6 +60,13 @@ export const BtnTema = styled.button`
   cursor:pointer;
 `
 
+export const Input = styled.input`
+  font-weight: 200;
+  font-size: normal;
+  margin: 0px 0px 5px 0px;
+  `
+Input.displayName = "Input"
+
 export const ContainerWrapper  = styled.div `
   background-color: '#F1F1F1';
   min-height: 100vh;
