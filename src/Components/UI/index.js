@@ -44,6 +44,10 @@ export const FieldError = styled.span`
   color: red;
   font-size: 12px;
 `
+export const Span = styled.span`
+  text-align: left;
+  width: 50%;
+`
 
 export const Saldo = styled.div`  
   font-weight: 700;
@@ -95,4 +99,5 @@ export const ActList = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
+  text-align:center
 `

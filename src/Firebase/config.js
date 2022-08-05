@@ -1,9 +1,9 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyDWz5jxmqnHhZee1rcfWH-A9eJt6usFtTQ",
-  authDomain: "habits-monitor.firebaseapp.com",
-  projectId: "habits-monitor",
-  storageBucket: "habits-monitor.appspot.com",
-  messagingSenderId: "859380826282",
-  appId: "1:859380826282:web:acf8fad6a24197ccd090d3",
-  measurementId: "G-VZ5TC56V9Z"
+  apiKey: "AIzaSyDr5n-LKnmavyGosqK9FjJadkHM4CAG9Og",
+  authDomain: "hmonitor-57097.firebaseapp.com",
+  projectId: "hmonitor-57097",
+  storageBucket: "hmonitor-57097.appspot.com",
+  messagingSenderId: "1038874301708",
+  appId: "1:1038874301708:web:213fe7a3fd63e4a93da529",
+  measurementId: "G-THD2K9C2R0"
 }

@@ -6,8 +6,6 @@ import { getFirestore, collection, query, where, getDocs, Timestamp, doc, update
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// JqwqJNbHtfXocFRkpMfOhZBuo6T2
-
 export const addDocument = async (theCollection, obj) => {
   return  await addDoc(collection(db, theCollection), obj);
 }
@@ -26,7 +24,7 @@ export const getUserIndicators = async (userId) => {
     data.push({userIndicator:doc.id, ...doc.data()})
   })
 
-  // console.log(data)
+  console.log('getUserIndicators', data)
 
   return data
 }
@@ -43,14 +41,14 @@ export const getActivitysOfDay = async (userId, dayStart, dayEnd) => {
 
   const querySnapshot = await getDocs(q)
 
-  querySnapshot.forEach(doc => dataResume.push(doc.data()))
+  querySnapshot.forEach(doc => dataResume.push({id:doc.id, ...doc.data()}))
 
-  //console.log('getActivitysOfDay ', dataResume)
+  console.log('getActivitysOfDay ', dayStart, dayEnd, dataResume)
 
   return dataResume
 }
 
-export const updateIndicator = (id) => {
-  const aux = doc(db, "userIndicators", id) 
-  return updateDoc(aux, {deleted:true}) 
+export const updateDocument = (collection, id, value) => {
+  const aux = doc(db, collection, id) 
+  return updateDoc(aux, value) 
 }

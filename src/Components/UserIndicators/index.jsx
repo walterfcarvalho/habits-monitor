@@ -1,11 +1,12 @@
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { getUserIndicators, updateIndicator, addDocument } from '../../Firebase/api'
+import { addDocument } from '../../Firebase/api'
 import styled from 'styled-components'
 
 import StyledHeader from '../StyleHeader'
-import { ContainerWrapper, Box, Button, ActList, Label, Input, FieldError } from '../../Components/UI'
+import { ContainerWrapper, Button, ActList, Label, Input, FieldError } from '../../Components/UI'
+import Indicators from '../Indicators'
 
 const Form = styled.form`
   box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
@@ -36,12 +37,7 @@ const UserIndicators = () => {
   const [useIndicators, setUseIndicators] = useState([])
   const [flagForm, setFlagForm] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
-
-  useEffect(() => {
-    listUserIndicators()
-  }, [])
-  
-  console.log(watch)
+  const description =  watch("description", "")
 
   function addIndicator (data) {
 
@@ -66,38 +62,18 @@ const UserIndicators = () => {
     })
   }
 
-  function deactivateIndicator(idx) {
-    updateIndicator(useIndicators[idx].userIndicator)
-      .then(res => (
-        setUseIndicators(
-          useIndicators.filter(item => item.userIndicator !== useIndicators[idx].userIndicator)
-        )
-      ))
-  }
-
-  function listUserIndicators() {
-    const userId = JSON.parse(localStorage.getItem("habbit-monitor")).uid
-
-    getUserIndicators(userId)
-      .then(data => setUseIndicators(data))
-  }
-
   return <>
     <StyledHeader title={"My indicators"}></StyledHeader>
 
     { !flagForm &&
       <ActList>
 
-      {useIndicators.map((item, idx) => (
-
-        <Box key={idx} positive={item.positive}  >
-          {item.indicator}
-
-          <img onClick={() => deactivateIndicator(idx)} src={require("../../images/trash.png")} height="30px" width="30px" alt="icon" />
-
-        </Box>
-
-      ))}
+        <Indicators
+          dateStart={new Date()}
+          isShowRemove={true}
+          isEdit={false}
+          isShowDaily={false}
+        />
 
       <Button primary type="submit" onClick={() => setFlagForm(!flagForm)}> Add </Button>
 
@@ -123,7 +99,7 @@ const UserIndicators = () => {
               })}
             />
             <FieldError>
-              {errors.description && errors.description.message}
+              {description && errors.description && errors.description.message}
             </FieldError>
           </Field>
           <Field primary>

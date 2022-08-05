@@ -10,6 +10,18 @@ export const theDate = (daysToAdvance = 0) => {
   return res
 }
 
+
+export const roundDate = (date) => {
+
+  return new Date( date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0)
+}
+
+export const ceilDate = (date) => {
+
+  return new Date( date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
+}
+
+
 export const lastSevenDays = (theDate = new Date()) => {
   let result = []
   let aux = theDate
