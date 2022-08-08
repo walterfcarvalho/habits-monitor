@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { getUserIndicators, updateDocument, getActivitysOfDay, addDocument } from '../../Firebase/api'
 import styled from 'styled-components'
-import { TailSpin } from 'react-loader-spinner'
 
 import { roundDate, ceilDate } from '../../util/dateTime'
-import { Box, Span } from '../UI'
+import { Box, Span, EmptyBox } from '../UI'
 import IMG_ADD from '../../images/add-button.png'
 import IMG_DEL from '../../images/rem-button.png'
+import TailSpinContainer from '../../LoadingComponent'
 
 const SetQuantity = styled.div`
   display:flex;
@@ -29,6 +29,7 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
   const [useIndicators, setUseIndicators] = useState([])
   const [flag, setFlag] = useState(true)
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
 
@@ -79,7 +80,11 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
   async function mountResume(userId, dayInitial, dayFinal) {
 
+    setLoading(true)
+
     const userIndicators = await getUserIndicators(userId)
+    
+    let res = undefined
 
     if (isShowPoints || isEdit) {
 
@@ -94,28 +99,29 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
           : { ...userIndicator, date: dayInitial, quantity: 0, activityId: "" }
       })
 
-      return activityResume
+      res = activityResume
     } else {
 
-      return userIndicators
-
+      res = userIndicators
     }
+
+    setLoading(false)
+
+    return res
   }
 
   return <>
 
-    {useIndicators.length === 0 &&
-      <TailSpin
-        height="80"
-        width="80"
-        color="#4fa94d"
-        ariaLabel="tail-spin-loading"
-        radius="1"
-        wrapperStyle={{}}
-        wrapperClass=""
-        visible={true}
-      />
+    {useIndicators.length === 0 && !isLoading &&
+      <EmptyBox>
+        
+        <p> No indicators added yet </p>
+
+      </EmptyBox>
     }
+
+
+    { isLoading && <TailSpinContainer/> }
 
     {useIndicators.length > 0 &&
       useIndicators.map((item, idx) => (
@@ -144,13 +150,13 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
           {isEdit &&
 
             <SetQuantity>
-              <img src={IMG_DEL} alt="remove qunatity" onClick={() => addActivity(idx, -1)} />
+              <img src={IMG_DEL} alt="remove quantity" onClick={() => addActivity(idx, -1)} />
 
               <Points>
                 {item.quantity ? item.quantity : 0}
               </Points>
 
-              <img src={IMG_ADD}  alt="add qunatity" onClick={() => addActivity(idx, +1)} />
+              <img src={IMG_ADD}  alt="add quantity" onClick={() => addActivity(idx, +1)} />
 
             </SetQuantity>
           }

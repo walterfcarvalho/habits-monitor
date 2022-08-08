@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { TailSpin } from 'react-loader-spinner'
 
 import { getUserIndicators, getActivitysOfDay } from '../../Firebase/api'
 import { ActList } from '../UI'
@@ -7,19 +6,9 @@ import { lastSevenDays, theDate } from '../../util/dateTime'
 import TheChart from '../Chart'
 import StyledHeader  from '../StyleHeader'
 import Indicators from '../Indicators'
+import TailSpinContainer from '../../LoadingComponent'
+import { EmptyBox } from '../UI'
 
-// const Points = styled.div`
-//   background-color:white;
-//   border-radius:10px;
-//   margin: 5px 20px 5px 5px;
-//   padding: 2px;
-//   width:20%;
-//   text-align:center;
-// `
-
-// const Span = styled.span`
-//   width: 50%;
-// `
 const Dasboard = () => {
   const [incatorsWeek, setIndicatorsWeek] = useState()
 
@@ -34,7 +23,7 @@ const Dasboard = () => {
 
     let dataWeek = []
 
-    for (let i = 7; i >= 1; i--) {
+    for (let i = 6; i >= 0; i--) {
 
       let info = await mountResume(userId, theDate(-i), theDate(-i + 1))
 
@@ -46,15 +35,6 @@ const Dasboard = () => {
     setIndicatorsWeek(dataWeek)
   }
 
-  // async function getDataDay() {
-  //   const userId = JSON.parse(localStorage.getItem("habbit-monitor")).uid
-  //   const dayInitial = theDate(0)
-  //   const dayFinal = theDate(1)
-
-  //   const day = await mountResume(userId, dayInitial, dayFinal)
-
-  //   setIndicatorsDay(day)
-  // }
 
   async function mountResume(userId, dayInitial, dayFinal) {
 
@@ -64,7 +44,7 @@ const Dasboard = () => {
 
     let activityResume = userIndicators.map(userIndicator => {
 
-      let idx = activitysOfDay.findIndex(act => act.indicator === userIndicator.id)
+      let idx = activitysOfDay.findIndex(act => act.indicator === userIndicator.userIndicator)
 
       return idx >= 0
         ? { ...userIndicator, date: dayInitial, quantity: activitysOfDay[idx].quantity }
@@ -80,16 +60,7 @@ const Dasboard = () => {
     <ActList>
 
       {!incatorsWeek &&
-        <TailSpin
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="tail-spin-loading"
-          radius="1"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />
+        <TailSpinContainer />
       }
 
       {incatorsWeek &&
@@ -101,7 +72,10 @@ const Dasboard = () => {
         </TheChart>
       }
 
-      <p> Today activities </p>
+      <EmptyBox>
+        <p> Today activities </p>
+      </EmptyBox>
+
 
       <Indicators
         dateStart={ new Date() }

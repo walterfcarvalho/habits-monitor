@@ -31,14 +31,7 @@ const Activities = () => {
         isShowRemove={false}
       />
 
-
-
-
     </ActList>
-
-
-
-
   </>
 }
 

@@ -26,24 +26,48 @@ export const Box = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items:center;
-//  background-color: ${ ({theme}) => theme.body};
   border-radius: 5px;
   box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
   padding: 20px;
   width: 60%;
   background-color: ${(props) => props.positive ? '#cbe3ac' : '#f0988b'};
 
+  @media (max-width: 800px) {
+    width: 95%;
+    margin: 5px;
+  }
+`
+  export const EmptyBox = styled.div`
+  margin:5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 60%;
+  background-color: ${(theme)=> theme.body};
+  margin: 20px 5px 20px 5px;
 
   @media (max-width: 800px) {
     width: 95%;
     margin: 5px;
   }
 `
-
 export const FieldError = styled.span`
   color: red;
   font-size: 12px;
 `
+export const Field = styled.div`
+  flex-grow: 2; 
+  display: flex;
+  flex-direction:  ${(props) => props.direction ? props.direction : "column"};
+  padding: 0px;
+  margin: 5px;
+  background-color: ${(theme => theme.body)};
+`
+
 export const Span = styled.span`
   text-align: left;
   width: 50%;
@@ -99,5 +123,22 @@ export const ActList = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
-  text-align:center
+  text-align:center;
+`
+
+export const Form = styled.form`
+  box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  background-color: ${(theme) => theme.body};
+  border-radius: 10px;
+  width: 50%;
+  height: 40%;
+  justify-content: center;
+  padding: 10px;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    margin: 5px;
+  }
 `

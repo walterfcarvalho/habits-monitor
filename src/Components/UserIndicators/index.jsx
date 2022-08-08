@@ -5,41 +5,19 @@ import { addDocument } from '../../Firebase/api'
 import styled from 'styled-components'
 
 import StyledHeader from '../StyleHeader'
-import { ContainerWrapper, Button, ActList, Label, Input, FieldError } from '../../Components/UI'
+import { ContainerWrapper, Button, ActList, Label, Input, FieldError, Field, Form } from '../UI'
 import Indicators from '../Indicators'
-
-const Form = styled.form`
-  box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  background-color: ${(theme) => theme.body};
-  border-radius: 10px;
-  width: 50%;
-  height: 40%;
-  justify-content: center;
-  padding: 10px;
-
-  @media (max-width: 800px) {
-    width: 100%;
-    margin: 5px;
-  }
-`
-const Field = styled.div`
-  flex-grow: 2; 
-  display: flex;
-  flex-direction:  ${(props) => props.direction ? props.direction : "column"};
-  padding: 0px;
-  margin: 5px;
-  background-color: ${(theme => theme.body)};
-`
+ 
 
 const UserIndicators = () => {
   const [useIndicators, setUseIndicators] = useState([])
   const [flagForm, setFlagForm] = useState(false)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
   const description =  watch("description", "")
 
   function addIndicator (data) {
+
+    setFlagForm(!flagForm)
 
     const userIndicator = {
       deleted:false,
@@ -56,9 +34,11 @@ const UserIndicators = () => {
         userIndicator: res.id,
         positive: data.isPositive === 'positive' ? true: false,
         indicator: data.description
-        }])
+      }])
+    })
 
-      setFlagForm(!flagForm)
+    reset('', {
+        keepValues: false,
     })
   }
 

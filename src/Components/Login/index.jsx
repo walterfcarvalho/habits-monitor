@@ -1,60 +1,47 @@
 import React, { useState } from "react"
-import styled from 'styled-components'
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
-import { ContainerWrapper, Button, Label } from '../UI'
 
-const Form = styled.form`
-  box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  background-color: ${(theme)=> theme.body};
-  border-radius: 10px;
-  width: 50%;
-  height: 40%;
-  justify-content: center;
-  padding: 10px;
+import { getAuth, signInWithEmailAndPassword, authWithGoogle} from "firebase/auth"
+import { getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 
-  @media (max-width: 800px) {
-    width: 100%;
-    margin: 5px;
-  }
-`
+import { ContainerWrapper, Button, Label, Span, Input, Field, Form, EmptyBox } from '../UI'
+import loginGoogleBanner  from '../../images/logingoogle.png'
 
-const Input = styled.input`
-  font-size: large;
-  font-weight: 200;
-  font-size: normal;
-  margin: 0px 0px 5px 0px;
-  `
-Input.displayName = "Input"
-
-const Field = styled.div`
-  flex-grow: 2; 
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  margin: 0px;
-  background-color: ${(theme => theme.body)};
-`
-Field.displayName = "Form"
-
-const Span = styled.span`
-  font-size: small;
-  color: red;
-`
 
 const Login = () => {
   const navigate = useNavigate()
   const { register, handleSubmit, undefined, formState: { errors } } = useForm()
   const [loginError, setLoginError] = useState()
 
-  const onSubmit = data => {
-    console.log(data)
+  const signInWithGoogle = () => { 
 
+    const auth = getAuth();
+    
+    getRedirectResult(auth)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+    
+        // The signed-in user info.
+        const user = result.user;
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+  
+  
+  const onSubmit = data => {
     const auth = getAuth()
 
     signInWithEmailAndPassword(auth, data.email.replace(/^\s+|\s+$/gm,'') , data.password.replace(/^\s+|\s+$/gm,''))
@@ -113,7 +100,24 @@ const Login = () => {
         <Field>
           <Button primary type="submit" value={"go"} > Go </Button>
         </Field>
+
+        <EmptyBox>
+
+          <img 
+            style={{width:"100%"}} 
+            src={loginGoogleBanner} 
+            alt="banner login with google" 
+            onClick={signInWithGoogle}
+          />
+
+        </EmptyBox>
+
       </Form>
+
+
+
+
+
 
     </ContainerWrapper>
   </>

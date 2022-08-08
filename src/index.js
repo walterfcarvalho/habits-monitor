@@ -10,7 +10,7 @@ import LockedRoute from './Components/ProtectedRoute/Index'
 import Login from './Components/Login'
 import { GlobalStyle } from './Components/globalStyle'
 import Dasboard from './Components/Dasboard'
-import UserIndicators from './Components/UserIndicators'
+import UserIndicators from './Components/UserIndicators/index.jsx'
 import Activities from './Components/Activities'
 
 // Initialize Firebase
