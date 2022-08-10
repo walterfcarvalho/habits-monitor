@@ -73,14 +73,16 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
     const dayInitial = roundDate(date) // theDate(0)
     const dayFinal = ceilDate(date)
 
+    setLoading(true)
+
     const day = await mountResume(userId, dayInitial, dayFinal)
+
+    setLoading(false)
 
     setUseIndicators(day)
   }
 
   async function mountResume(userId, dayInitial, dayFinal) {
-
-    setLoading(true)
 
     const userIndicators = await getUserIndicators(userId)
     
@@ -104,22 +106,18 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
       res = userIndicators
     }
-
-    setLoading(false)
-
     return res
   }
 
   return <>
 
-    {useIndicators.length === 0 && !isLoading &&
+    {  !isLoading && useIndicators.length === 0 && 
       <EmptyBox>
         
         <p> No indicators added yet </p>
 
       </EmptyBox>
     }
-
 
     { isLoading && <TailSpinContainer/> }
 

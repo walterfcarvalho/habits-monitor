@@ -1,23 +1,11 @@
 import styled from 'styled-components'
- 
-export const Icone = styled.img`
-  height: 25px;
-  width: 25px;
-`
-export const IconeTema = styled(Icone)`
-  filter: ${({theme}) => theme.filter };
-` 
-export const Button = styled.button`
-  margin: 15px auto 0px auto;
-  display: block;
-  border-radius: 20px;
-  background-color: #41d3be;
-  border: none;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 8px 20px;
-  cursor: pointer;
+
+
+export const ActList = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  text-align:center;
 `
 
 export const Box = styled.div`
@@ -37,46 +25,31 @@ export const Box = styled.div`
     margin: 5px;
   }
 `
-  export const EmptyBox = styled.div`
-  margin:5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items:center;
-  border-radius: 5px;
-  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
-  padding: 20px;
-  width: 60%;
-  background-color: ${(theme)=> theme.body};
-  margin: 20px 5px 20px 5px;
 
-  @media (max-width: 800px) {
-    width: 95%;
-    margin: 5px;
-  }
-`
-export const FieldError = styled.span`
-  color: red;
-  font-size: 12px;
-`
-export const Field = styled.div`
-  flex-grow: 2; 
-  display: flex;
-  flex-direction:  ${(props) => props.direction ? props.direction : "column"};
-  padding: 0px;
-  margin: 5px;
-  background-color: ${(theme => theme.body)};
+export const Button = styled.button`
+  margin: 15px auto 0px auto;
+  display: block;
+  border-radius: 20px;
+  background-color: #41d3be;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 20px;
+  cursor: pointer;
 `
 
-export const Span = styled.span`
-  text-align: left;
-  width: 50%;
+export const BtnCabecalho = styled.a`
+  text-align: center;
+  border-radius: 3px;
+  padding: 5px 5px;
+  margin: 0 10px;
+  font-weight: 600;
+  border: 2px solid white;
+  color: white;
+  background: ${(props) => props.primary ? "white" : "corPrimaria"};
 `
 
-export const Saldo = styled.div`  
-  font-weight: 700;
-  font-size: 32px;
-`
 
 export const BtnTema = styled.button`
   position:absolute;
@@ -87,58 +60,100 @@ export const BtnTema = styled.button`
   cursor:pointer;
 `
 
-export const Input = styled.input`
-  font-weight: 200;
-  font-size: normal;
-  margin: 0px 0px 5px 0px;
-  `
-Input.displayName = "Input"
 
-export const ContainerWrapper  = styled.div `
+export const ContainerWrapper = styled.div`
   background-color: '#F1F1F1';
   min-height: 100vh;
   padding: 0px 15vw;
   display:flex;
   justify-content: center ;
 `
-export const Label = styled.label`
-  margin: 0px 0px 5px 0px;
-  color: ${(theme)=> theme.fontColor};
-  // color: blue;
-`
-Label.displayName = "Label"
 
-export const BtnCabecalho =  styled.a`
-  text-align: center;
-  border-radius: 3px;
-  padding: 5px 5px;
-  margin: 0 10px;
-  font-weight: 600;
-  border: 2px solid white;
-  color: white;
-  background: ${(props)=> props.primary ? "white": "corPrimaria"};
+
+export const EmptyBox = styled.div`
+  margin:5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 60%;
+  background-color: ${(theme) => theme.body};
+  margin: 20px 5px 20px 5px;
+
+  @media (max-width: 800px) {
+    width: 95%;
+    margin: 5px;
+  }
 `
 
-export const ActList = styled.div`
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  text-align:center;
+export const Field = styled.div`
+  //  flex-grow: 2; 
+  display: flex;
+  flex-direction:  ${(props) => props.direction ? props.direction : "column"};
+  padding: 0px;
+  margin: 5px;
+  width: 100%;
+  background-color: ${(theme => theme.body)};
 `
+
+export const FieldError = styled.span`
+  color: red;
+  font-size: 12px;
+`
+
 
 export const Form = styled.form`
   box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
   background-color: ${(theme) => theme.body};
   border-radius: 10px;
   width: 50%;
   height: 40%;
-  justify-content: center;
   padding: 10px;
 
   @media (max-width: 800px) {
     width: 100%;
     margin: 5px;
   }
+`
+
+
+export const Icone = styled.img`
+  height: 25px;
+  width: 25px;
+`
+
+
+export const IconeTema = styled(Icone)`
+  filter: ${({ theme }) => theme.filter};
+`
+
+
+export const Input = styled.input`
+  font-weight: 200;
+  font-size: normal;
+  margin: 0px 0px 5px 0px;
+`
+
+export const Label = styled.label`
+  margin: 0px 0px 5px 0px;
+  color: ${(theme) => theme.fontColor};
+  // color: blue;
+`
+
+
+export const Span = styled.span`
+  text-align: left;
+  width: 50%;
+`
+
+export const Saldo = styled.div`  
+  font-weight: 700;
+  font-size: 32px;
 `

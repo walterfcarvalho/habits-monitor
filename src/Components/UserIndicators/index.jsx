@@ -1,17 +1,17 @@
 
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { addDocument } from '../../Firebase/api'
-import styled from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
+import { addDocument } from '../../Firebase/api'
 import StyledHeader from '../StyleHeader'
 import { ContainerWrapper, Button, ActList, Label, Input, FieldError, Field, Form } from '../UI'
 import Indicators from '../Indicators'
  
 
 const UserIndicators = () => {
-  const [useIndicators, setUseIndicators] = useState([])
-  const [flagForm, setFlagForm] = useState(false)
+  const [ useIndicators, setUseIndicators ] = useState([])
+  const [ flagForm, setFlagForm ] = useState(false)
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
   const description =  watch("description", "")
 
@@ -42,7 +42,7 @@ const UserIndicators = () => {
     })
   }
 
-  return <>
+  return <ThemeProvider> 
     <StyledHeader title={"My indicators"}></StyledHeader>
 
     { !flagForm &&
@@ -115,14 +115,6 @@ const UserIndicators = () => {
         </Form>
       </ContainerWrapper>
     }
-
-
-
-
-
-
-
-
-  </>
+  </ThemeProvider>
 }
 export default UserIndicators
