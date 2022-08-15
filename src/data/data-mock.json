@@ -1,0 +1,90 @@
+{
+    "activities": [
+        {
+            "id": "F6aN46n3qob6qBsxU8zd",
+            "indicator": "8oZIov6qE2hZE15BbrHX",
+            "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43",
+            "quantity": 4,
+            "date": {
+                "seconds": 1659957303,
+                "nanoseconds": 0
+            }
+        },
+        {
+            "id": "L5mpa4yf7gDRDbmyWmtM",
+            "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43",
+            "date": {
+                "seconds": 1659957303,
+                "nanoseconds": 0
+            },
+            "indicator": "n5mSFRaOaITzEghOrxZD",
+            "quantity": 1
+        },
+        {
+            "id": "jOC90znKuj6IDaw6Oubo",
+            "indicator": "aV62kWAUdDJpKw9RMoxE",
+            "date": {
+                "seconds": 1659957303,
+                "nanoseconds": 0
+            },
+            "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43",
+            "quantity": 2
+        }
+    ],
+    "userIndicators": [
+    {
+        "userIndicator": "8oZIov6qE2hZE15BbrHX",
+        "target": 1,
+        "positive": true,
+        "deleted": false,
+        "indicator": "Exercícios",
+        "metricType": "Minutes",
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43"
+    },
+    {
+        "userIndicator": "SnHoUOLTsQmofTp6tZql",
+        "positive": false,
+        "indicator": "bebida  alcoólica",
+        "target": 1,
+        "deleted": false,
+        "metricType": "Units",
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43"
+    },
+    {
+        "userIndicator": "aV62kWAUdDJpKw9RMoxE",
+        "metricType": "Units",
+        "positive": true,
+        "target": 1,
+        "deleted": false,
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43",
+        "indicator": "Beber agua"
+    },
+    {
+        "userIndicator": "g8Ci6x0AJ4OnCMTolo7O",
+        "positive": true,
+        "target": 1,
+        "metricType": "Units",
+        "deleted": false,
+        "indicator": "Porção de verduras e legumes",
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43"
+    },
+    {
+        "userIndicator": "mNcOfOPPpsrMyOPOOar9",
+        "metricType": "Units",
+        "indicator": "Porções de industrializados",
+        "deleted": false,
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43",
+        "target": 1,
+        "positive": false
+    },
+    {
+        "userIndicator": "n5mSFRaOaITzEghOrxZD",
+        "indicator": "Porções de frutas",
+        "metricType": "Units",
+        "deleted": false,
+        "target": 1,
+        "positive": true,
+        "user": "aURvmT4AVZZnuxWGcSJfrR3pSd43"
+    }
+]
+}

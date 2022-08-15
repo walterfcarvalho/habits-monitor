@@ -9,6 +9,8 @@ import Indicators from '../Indicators'
 import TailSpinContainer from '../../LoadingComponent'
 import { EmptyBox } from '../UI'
 
+import mockData from '../../data/data-mock.json' 
+
 const Dasboard = () => {
   const [incatorsWeek, setIndicatorsWeek] = useState()
 
@@ -37,6 +39,9 @@ const Dasboard = () => {
 
 
   async function mountResume(userId, dayInitial, dayFinal) {
+    
+    // const userIndicators = mockData.userIndicators || await getUserIndicators(userId)
+    // const activitysOfDay = mockData.activities || await getActivitysOfDay(userId, dayInitial, dayFinal)
 
     const userIndicators = await getUserIndicators(userId)
 
