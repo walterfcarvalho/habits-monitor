@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
 
-import { addDocument } from '../../Firebase/api'
-import { ContainerWrapper, Button, ActList, Label, Input, FieldError, Field, Form } from '../UI'
+import * as firebase from '../../Firebase/api'
+import * as S from '../UI'
 import StyledHeader from '../StyleHeader'
 import Indicators from '../Indicators'
 
@@ -27,7 +27,7 @@ const UserIndicators = ({ theTheme, setTheme }) => {
       metricType: data.metricType,
     }
 
-    addDocument('userIndicators', userIndicator).then(res => {
+    firebase.addDocument('userIndicators', userIndicator).then(res => {
 
       setUseIndicators([...useIndicators, {
         userIndicator: res.id,
@@ -49,7 +49,7 @@ const UserIndicators = ({ theTheme, setTheme }) => {
     />
 
     {!flagForm &&
-      <ActList>
+      <S.ActList>
 
         <Indicators
           dateStart={new Date()}
@@ -58,18 +58,18 @@ const UserIndicators = ({ theTheme, setTheme }) => {
           isShowDaily={false}
         />
 
-        <Button primary type="submit" onClick={() => setFlagForm(!flagForm)}> Add </Button>
+        <S.Button primary type="submit" onClick={() => setFlagForm(!flagForm)}> Add </S.Button>
 
-      </ActList>
+      </S.ActList>
     }
     {flagForm &&
-      <ContainerWrapper>
-        <Form onSubmit={handleSubmit(addIndicator)}>
-          <Field primary>
-            <Label htmlFor="description">
+      <S.ContainerWrapper>
+        <S.Form onSubmit={handleSubmit(addIndicator)}>
+          <S.Field primary>
+            <S.Label htmlFor="description">
               Indicator description
-            </Label>
-            <Input
+            </S.Label>
+            <S.Input
               onChange={console.log('change')}
               autoFocus={true}
               placeholder=""
@@ -81,42 +81,42 @@ const UserIndicators = ({ theTheme, setTheme }) => {
                 }
               })}
             />
-            <FieldError>
+            <S.FieldError>
               {description && errors.description && errors.description.message}
-            </FieldError>
-          </Field>
-          <Field primary>
-            <Label htmlFor="metricType">
+            </S.FieldError>
+          </S.Field>
+          <S.Field primary>
+            <S.Label htmlFor="metricType">
               Type
-            </Label>
+            </S.Label>
 
             <select {...register("metricType", { required: 'Choose a Type' })}>
               <option value="Units">Units</option>
               <option value="Minutes">Minutes</option>
             </select>
-            <FieldError>
+            <S.FieldError>
               {errors.metricType && errors.metricType.message}
-            </FieldError>
-          </Field>
+            </S.FieldError>
+          </S.Field>
 
-          <Field primary>
-            <Label htmlFor="isPositive">
+          <S.Field primary>
+            <S.Label htmlFor="isPositive">
               Influence
-            </Label>
+            </S.Label>
 
             <select {...register("isPositive", { required: 'Choose a Type' })}>
               <option value="positive">Positive</option>
               <option value="negative">Negative</option>
             </select>
             {errors.metricType && errors.metricType.message}
-          </Field>
+          </S.Field>
 
-          <Field direction={"row"}>
-            <Button primary type="submit" value={"Ok"} > Ok </Button>
-            <Button primary type="reset" onClick={() => setFlagForm(!flagForm)} > Cancel </Button>
-          </Field>
-        </Form>
-      </ContainerWrapper>
+          <S.Field direction={"row"}>
+            <S.Button primary type="submit" value={"Ok"} > Ok </S.Button>
+            <S.Button primary type="reset" onClick={() => setFlagForm(!flagForm)} > Cancel </S.Button>
+          </S.Field>
+        </S.Form>
+      </S.ContainerWrapper>
     }
   </>
 }
