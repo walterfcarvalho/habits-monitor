@@ -24,7 +24,7 @@ export const getUserIndicators = async (userId) => {
     data.push({userIndicator:doc.id, ...doc.data()})
   })
 
-  console.log('getUserIndicators', data)
+  //console.log('getUserIndicators', data)
 
   return data
 }
@@ -43,7 +43,7 @@ export const getActivitysOfDay = async (userId, dayStart, dayEnd) => {
 
   querySnapshot.forEach(doc => dataResume.push({id:doc.id, ...doc.data()}))
 
-  console.log('getActivitysOfDay ', dayStart, dayEnd, dataResume)
+  // console.log('getActivitysOfDay ', dayStart, dayEnd, dataResume)
 
   return dataResume
 }

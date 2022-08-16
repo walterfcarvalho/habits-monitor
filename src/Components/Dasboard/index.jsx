@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import { ThemeProvider } from 'styled-components'
 
 import { getUserIndicators, getActivitysOfDay } from '../../Firebase/api'
-import { ActList } from '../UI'
+import { ActList,EmptyBox } from '../UI'
 import { lastSevenDays, theDate } from '../../util/dateTime'
 import TheChart from '../Chart'
 import StyledHeader  from '../StyleHeader'
@@ -11,7 +12,7 @@ import { EmptyBox } from '../UI'
 
 import mockData from '../../data/data-mock.json' 
 
-const Dasboard = () => {
+const Dasboard = ({ theTheme, setTheme}) => {
   const [incatorsWeek, setIndicatorsWeek] = useState()
 
   useEffect(() => {
@@ -28,18 +29,17 @@ const Dasboard = () => {
     for (let i = 6; i >= 0; i--) {
 
       let info = await mountResume(userId, theDate(-i), theDate(-i + 1))
-
+      
       dataWeek.push(
         info.reduce((prev, curr) => prev + curr.quantity * (curr.positive ? 1 : -1), 0)
       )
-
     }
     setIndicatorsWeek(dataWeek)
   }
 
 
   async function mountResume(userId, dayInitial, dayFinal) {
-    
+
     // const userIndicators = mockData.userIndicators || await getUserIndicators(userId)
     // const activitysOfDay = mockData.activities || await getActivitysOfDay(userId, dayInitial, dayFinal)
 
@@ -59,12 +59,17 @@ const Dasboard = () => {
   }
 
   return <>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <StyledHeader title={"Dashboard"}></StyledHeader>
+    <StyledHeader 
+      theTheme={theTheme}
+      setTheme={setTheme}
+      title={"Dashboard"}
+    />
 
     <ActList>
 
-      {!incatorsWeek &&
+      { !incatorsWeek &&
         <TailSpinContainer />
       }
 
@@ -88,7 +93,6 @@ const Dasboard = () => {
         isEdit={false}
         isShowRemove={false}
       />
-
     </ActList>
   </>
 }

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-
 export const ActList = styled.div`
   display:flex;
   flex-direction: column;
   align-items: center;
   text-align:center;
+  background-color: ${({theme}) => theme.body };
 `
 
 export const Box = styled.div`
@@ -151,6 +151,7 @@ export const Label = styled.label`
 export const Span = styled.span`
   text-align: left;
   width: 50%;
+  color: ${({theme})=> theme.text};
 `
 
 export const Saldo = styled.div`  

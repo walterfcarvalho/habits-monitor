@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ActList } from '../UI'
+import { ActList, EmptyBox } from '../UI'
 import StyledHeader from '../StyleHeader'
 import Indicators from '../Indicators'
 import DateSelector from '../DateSelector'
@@ -9,24 +9,30 @@ import DateSelector from '../DateSelector'
 
 
 
-const Activities = () => {
+const Activities = ({ theTheme, setTheme }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   return <>
 
-    <StyledHeader title={"Daily activities"}></StyledHeader>
+    <StyledHeader
+      title={"Daily activities"}
+      theTheme={theTheme}
+      setTheme={setTheme}
+    />
 
     <ActList>
 
-      Activities
+      <EmptyBox>
+        <p> Today activities </p>
+      </EmptyBox>
 
       <DateSelector
         startDate={startDate}
-        fnOnChange={(date) => setStartDate(date)}      
+        fnOnChange={(date) => setStartDate(date)}
       />
 
 
-{/*       <DatePicker 
+      {/*       <DatePicker 
         selected={startDate} 
         onChange={ (date) => setStartDate(date)} 
       />

@@ -1,33 +1,38 @@
+//import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { BtnCabecalho } from '../UI'
+
+//import { BtnCabecalho } from '../UI'
 import SideBar from '../SideBar/index'
 import { corPrimaria } from '../UI/variables'
-import { useNavigate } from 'react-router-dom'
+import Switcher from '../Switcher'
 
 const TheStyledHeader = styled.nav`
-background-color: ${corPrimaria};
-display: flex;
-justify-content: space-between;
-padding: 0 1vw;
-height: 7vh;
-align-items: center;
+  background-color: ${corPrimaria};
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1vw;
+  height: 7vh;
+  align-items: center;
 `
 
-const StyledHeader = ({title}) => {
-  let navigate = useNavigate()
-
-  function logout() {
-    localStorage.clear()
-    navigate("/login")
-  }
+const StyledHeader = ({theTheme, setTheme, title}) => {
 
   return <TheStyledHeader id={'outer-container'} >
-    <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'}></SideBar>
+    <SideBar 
+      pageWrapId={'page-wrap'} 
+      outerContainerId={'outer-container'}
+    />
+
     <h1>  {title}  </h1>
     
-    <BtnCabecalho onClick={logout}   >
+    {/* <BtnCabecalho onClick={logout} >
       Logout
-    </BtnCabecalho>
+    </BtnCabecalho> */}
+  
+    <Switcher 
+      theTheme={theTheme} 
+      setTheme={setTheme} 
+    /> 
 
   </TheStyledHeader>
 }

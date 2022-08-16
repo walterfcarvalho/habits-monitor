@@ -7,45 +7,49 @@ import { addDocument } from '../../Firebase/api'
 import StyledHeader from '../StyleHeader'
 import { ContainerWrapper, Button, ActList, Label, Input, FieldError, Field, Form } from '../UI'
 import Indicators from '../Indicators'
- 
 
-const UserIndicators = () => {
-  const [ useIndicators, setUseIndicators ] = useState([])
-  const [ flagForm, setFlagForm ] = useState(false)
+
+const UserIndicators = ({ theTheme, setTheme }) => {
+  const [useIndicators, setUseIndicators] = useState([])
+  const [flagForm, setFlagForm] = useState(false)
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
-  const description =  watch("description", "")
+  const description = watch("description", "")
 
-  function addIndicator (data) {
+  function addIndicator(data) {
 
     setFlagForm(!flagForm)
 
     const userIndicator = {
-      deleted:false,
+      deleted: false,
       indicator: data.description,
-      positive: data.isPositive === 'positive' ? true: false,
+      positive: data.isPositive === 'positive' ? true : false,
       user: JSON.parse(localStorage.getItem("habbit-monitor")).uid,
-      target:1,
-      metricType: data.metricType, 
+      target: 1,
+      metricType: data.metricType,
     }
 
-    addDocument('userIndicators', userIndicator).then( res => {
+    addDocument('userIndicators', userIndicator).then(res => {
 
       setUseIndicators([...useIndicators, {
         userIndicator: res.id,
-        positive: data.isPositive === 'positive' ? true: false,
+        positive: data.isPositive === 'positive' ? true : false,
         indicator: data.description
       }])
     })
 
     reset('', {
-        keepValues: false,
+      keepValues: false,
     })
   }
 
-  return <ThemeProvider> 
-    <StyledHeader title={"My indicators"}></StyledHeader>
+  return <>
+    <StyledHeader
+      theTheme={theTheme}
+      setTheme={setTheme}
+      title={"My indicators"}
+    />
 
-    { !flagForm &&
+    {!flagForm &&
       <ActList>
 
         <Indicators
@@ -55,9 +59,9 @@ const UserIndicators = () => {
           isShowDaily={false}
         />
 
-      <Button primary type="submit" onClick={() => setFlagForm(!flagForm)}> Add </Button>
+        <Button primary type="submit" onClick={() => setFlagForm(!flagForm)}> Add </Button>
 
-    </ActList>
+      </ActList>
     }
     {flagForm &&
       <ContainerWrapper>
@@ -115,6 +119,6 @@ const UserIndicators = () => {
         </Form>
       </ContainerWrapper>
     }
-  </ThemeProvider>
+  </>
 }
 export default UserIndicators

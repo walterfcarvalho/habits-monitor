@@ -2,58 +2,42 @@ import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 
-
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
-
 import { ContainerWrapper, Button, Label, Span, Input, Field, Form, EmptyBox } from '../UI'
 import loginGoogleBanner from '../../images/logingoogle.png'
-
 
 const Login = () => {
   const navigate = useNavigate()
   // eslint-disable-next-line
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const [loginError, setLoginError] = useState()
-
+  const [isLoading, setIsLoading] = useState(false)
+  const auth = getAuth()
 
   useEffect(() => {
-    const auth = getAuth()
     getRedirectResult(auth)
       .then((result) => {
 
-        
-        
         if (result !== null) {
-          window.alert('fsdfsd')
-          console.log('getRedirectResult', result)
+          setIsLoading(true)
 
           localStorage.setItem("habbit-monitor", JSON.stringify(result.user))
 
           navigate("/dashboard")
         }
-
       }).catch((error) => {
-        console.log('error', error)
-
-        window.alert(error.message)
-        //const errorCode = error.code;
-        //const errorMessage = error.message;
-        // The email of the user's account used.
-        //    const email = error.customData.email;
-        // The AuthCredential type that was used.
-        //const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-
+        setLoginError(error.message)
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loga = () => {
-    const autorizator = getAuth();
+    setIsLoading(true)
+
     const provider = new GoogleAuthProvider();
 
-    signInWithRedirect(autorizator, provider).then(res => console.log(res))
+    signInWithRedirect(auth, provider).then(res => console.log('login com redirect'))
   }
 
 
@@ -66,20 +50,16 @@ const Login = () => {
         localStorage.setItem("habbit-monitor", JSON.stringify(userCredential.user))
 
         navigate("/dashboard")
-
-
       })
-
       .catch((error) => {
-        //const errorCode = error.code;
-        //const errorMessage = error.message;
         setLoginError(error.message)
       });
-
   }
 
   return <>
     <ContainerWrapper>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Field>
           <Label primary
@@ -94,8 +74,8 @@ const Login = () => {
                 value: 99,
                 message: 'Max length is 99',
               }
-            })}
-          />
+            })} />
+
           <Span> {errors.email && errors.email.message} </Span>
         </Field>
 
@@ -105,6 +85,7 @@ const Login = () => {
             htmlFor="password">Password
           </Label>
           <Input onChange={setLoginError}
+          
             type="password"
             {...register("password", {
               required: { message: "Password is required" }
@@ -119,16 +100,25 @@ const Login = () => {
           <Button primary type="submit" value={"go"} > Go </Button>
         </Field>
 
-        <EmptyBox>
 
-          <img
-            style={{ width: "100%" }}
-            src={loginGoogleBanner}
-            alt="banner login with google"
-            onClick={loga}
-          />
-        </EmptyBox>
+        {isLoading &&
 
+          <> loading
+          </>
+
+        }
+
+        {!isLoading &&
+
+          <EmptyBox>
+            <img
+              style={{ width: "100%" }}
+              src={loginGoogleBanner}
+              alt="banner login with google"
+              onClick={loga}
+            />
+          </EmptyBox>
+        }
       </Form>
 
     </ContainerWrapper>

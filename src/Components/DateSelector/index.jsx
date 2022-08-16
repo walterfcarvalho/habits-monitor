@@ -12,9 +12,8 @@ const DateSelector = ({startDate, fnOnChange}) => {
 function reducer(state, action) {
   switch (action.type) {
     case 'focusChange':{
-      console.log('çhange' )
       return {...state, showDatepicker: action.payload}
-    }
+    } 
     case 'dateChange':{
       console.log('datachange' )
       fnOnChange(action.payload.date)

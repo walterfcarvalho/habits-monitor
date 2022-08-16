@@ -3,16 +3,18 @@ import ThemeOn from '../../images/themeOff.svg'
 import ThemeOff from '../../images/themeOn.svg'
 import { Icone } from '../UI'
 
-const claro = <Icone src={ThemeOn} alt= "Tema Claro"/>
-const escuro = <Icone src={ThemeOff} alt= "Tema escuro"/>
+// const claro = <Icone src={ThemeOn} alt= "Tema Claro"/>
+// const escuro = <Icone src={ThemeOff} alt= "Tema escuro"/>
 
-export default Switcher = ({tema}) => {
+const Switcher = ({theTheme, setTheme}) => {
 
   return (
-    tema ? escuro : claro
+    <Icone 
+      src={theTheme ? ThemeOn : ThemeOff } 
+      alt= "Tema Claro"
+      onClick = {() => setTheme() }  
+    />
   )
-
 }
 
-
-  
+export default Switcher

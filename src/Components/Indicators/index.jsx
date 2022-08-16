@@ -3,27 +3,32 @@ import { getUserIndicators, updateDocument, getActivitysOfDay, addDocument } fro
 import styled from 'styled-components'
 
 import { roundDate, ceilDate } from '../../util/dateTime'
-import { Box, Span, EmptyBox } from '../UI'
+import { Box, EmptyBox } from '../UI'
 import IMG_ADD from '../../images/add-button.png'
 import IMG_DEL from '../../images/rem-button.png'
 import TailSpinContainer from '../../LoadingComponent'
 
-const SetQuantity = styled.div`
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+const H3 = styled.h3`
+color: ${({theme}) => theme.text } ;
 `
 
 const Points = styled.div`
-  background-color:white;
+  background-color: ${({theme}) => theme.body };
   border-radius:5px;
   margin: 5px 10px 5px 10px;
   padding: 20px;
   width:50px;
   text-align:center;
   padding: 5px;
-`
+  font-size: x-large;
+  `
+  
+  const SetQuantity = styled.div`
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  `
 
 const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
@@ -125,15 +130,15 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
       useIndicators.map((item, idx) => (
         <Box positive={item.positive} key={idx} >
 
-          <Span>
+          <H3>
             {item.indicator}
-          </Span>
+          </H3>
 
           {isShowPoints &&
             <Points>
-              <h3>
+              <H3>
                 {item.quantity ? item.quantity : 0}
-              </h3>
+              </H3>
             </Points>
           }
 
