@@ -1,7 +1,9 @@
 import React from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2'
+import { ChartContainer } from './styles';
 // import faker from 'faker';
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -11,40 +13,39 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const TheChart = ({ data, labels, title }) => {
 
-  function getOptions(title) {
-    return {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: title,
-          text: title,
-        },
+  const options = {
+    maintainAspectRatio : false,
+    plugins: {
+      legend: {
+        position: 'top',
       },
-    };
+      title: {
+        display: title,
+        text: title,
+      },
+    },
+  };
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: '',
+        data: data,
+        //data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+        //borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'violet',
+        backgroundColor: 'violet',
+      }
+    ]
   }
 
-  function getData(data, labels) {
 
-    return {
-      labels,
-      datasets: [
-        {
-          label: '',
-          data: data,
-          //data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-          //borderColor: 'rgb(255, 99, 132)',
-          borderColor: 'violet',
-          backgroundColor: 'violet',
-        }
-      ],
-    }
-  }
-
-
-  return <Line options={getOptions(title)} data={getData(data, labels)} />
+  return (
+    <ChartContainer>
+      <Line options={options} data={chartData} />
+    </ChartContainer>
+  )
 }
 
 export default TheChart
