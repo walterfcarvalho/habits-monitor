@@ -46,8 +46,13 @@ const StyledMenu = styled.nav`
 const Menu = ({ open }) => {
   const navigate = useNavigate()
 
-  return (
-    <StyledMenu open={open}  >
+  const logout = () => {
+    localStorage.clear()
+    navigate("/login")  
+  }
+
+
+  return <StyledMenu open={open} >
       <a href="" onClick={() => navigate("/dashboard")}  >
         <span role="img" aria-label="My indicators"></span>
         Dashboard
@@ -60,8 +65,11 @@ const Menu = ({ open }) => {
         <span role="img" aria-label="My indicators"></span>
         Activities
       </a>
+      <a href="" onClick={() => logout() }  >
+        <span role="img" aria-label="Logout"></span>
+        Logout
+      </a>
     </StyledMenu>
-  )
 }
 
 const StyledBurger = styled.button`

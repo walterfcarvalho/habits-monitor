@@ -37,9 +37,6 @@ const Dasboard = ({ theTheme, setTheme}) => {
 
   async function mountResume(userId, dayInitial, dayFinal) {
 
-    // const userIndicators = mockData.userIndicators || await getUserIndicators(userId)
-    // const activitysOfDay = mockData.activities || await getActivitysOfDay(userId, dayInitial, dayFinal)
-
     const userIndicators = await getUserIndicators(userId)
 
     const activitysOfDay = await getActivitysOfDay(userId, dayInitial, dayFinal)

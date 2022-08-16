@@ -1,7 +1,5 @@
-//import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-//import { BtnCabecalho } from '../UI'
 import SideBar from '../SideBar/index'
 import { corPrimaria } from '../UI/variables'
 import Switcher from '../Switcher'
@@ -24,11 +22,7 @@ const StyledHeader = ({theTheme, setTheme, title}) => {
     />
 
     <h1>  {title}  </h1>
-    
-    {/* <BtnCabecalho onClick={logout} >
-      Logout
-    </BtnCabecalho> */}
-  
+      
     <Switcher 
       theTheme={theTheme} 
       setTheme={setTheme} 

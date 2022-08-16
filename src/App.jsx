@@ -37,8 +37,7 @@ const App = () => {
         <Route path="*" element={<Login />} />
       </Routes>
 
-  </ThemeProvider >
-
+  </ThemeProvider>
 }
 
 export default App
