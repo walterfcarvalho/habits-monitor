@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Routes, Route, unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
 import { createBrowserHistory } from "history"
 
 import App from './App'

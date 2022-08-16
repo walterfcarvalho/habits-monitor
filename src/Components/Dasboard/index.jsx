@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { ThemeProvider } from 'styled-components'
 
 import { getUserIndicators, getActivitysOfDay } from '../../Firebase/api'
 import { ActList,EmptyBox } from '../UI'
@@ -8,9 +7,7 @@ import TheChart from '../Chart'
 import StyledHeader  from '../StyleHeader'
 import Indicators from '../Indicators'
 import TailSpinContainer from '../../LoadingComponent'
-import { EmptyBox } from '../UI'
 
-import mockData from '../../data/data-mock.json' 
 
 const Dasboard = ({ theTheme, setTheme}) => {
   const [incatorsWeek, setIndicatorsWeek] = useState()

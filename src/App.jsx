@@ -1,17 +1,14 @@
-import { Routes, Route, unstable_HistoryRouter as HistoryRouter } from "react-router-dom"
-
-import Dasboard from './Components/Dasboard'
-
-import { ThemeProvider } from 'styled-components'
-import { temaClaro, temaEscuro } from './Components/UI/temas'
-import { getThemeObj, getTheme } from './Components/UI/getTheme'
 import { useState } from 'react'
+import { Routes, Route } from "react-router-dom"
+import { ThemeProvider } from 'styled-components'
+
+import { temaClaro, temaEscuro } from './Components/UI/temas'
+import { getTheme } from './Components/UI/getTheme'
 import { GlobalStyle } from './Components/globalStyle'
 
-
+import Dasboard from './Components/Dasboard'
 import LockedRoute from './Components/ProtectedRoute/Index'
 import Login from './Components/Login'
-
 import UserIndicators from './Components/UserIndicators/index.jsx'
 import Activities from './Components/Activities'
 
@@ -21,7 +18,7 @@ const App = () => {
   const [theTheme, setTheme] = useState(getTheme)
 
   function handleTheme (){
-    console.log(`handletheme: ${theTheme}`)
+    localStorage.setItem('theme', !theTheme )
     setTheme ( !theTheme )
   }
 

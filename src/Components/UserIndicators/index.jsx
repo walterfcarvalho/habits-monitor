@@ -1,11 +1,10 @@
 
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { ThemeProvider } from 'styled-components'
 
 import { addDocument } from '../../Firebase/api'
-import StyledHeader from '../StyleHeader'
 import { ContainerWrapper, Button, ActList, Label, Input, FieldError, Field, Form } from '../UI'
+import StyledHeader from '../StyleHeader'
 import Indicators from '../Indicators'
 
 
