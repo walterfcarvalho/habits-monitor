@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { ChartContainer } from './styles'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
+
+
 const TheChart = ({ data, labels, title }) => {
 
-  const options = {
-    maintainAspectRatio : false,
+  const [dataChart, setDataChart] = useState({
+    labels,
+    datasets: [
+      {
+        label: '',
+        data: data,
+        borderColor: 'violet',
+        backgroundColor: 'violet',
+      }
+    ]
+  })
+
+  const [optionsChart, setOptionsChart] = useState({
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -19,27 +33,27 @@ const TheChart = ({ data, labels, title }) => {
       },
     },
   }
-
-  const chartData = {
-    labels,
-    datasets: [
-      {
-        label: '',
-        data: data,
-        //data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-        //borderColor: 'rgb(255, 99, 132)',
-        borderColor: 'violet',
-        backgroundColor: 'violet',
-      }
-    ]
-  }
-
-
-  return (
-    <ChartContainer>
-      <Line options={options} data={chartData} />
-    </ChartContainer>
   )
+
+  useEffect(() => {
+    setDataChart(old => {
+      console.log(data)
+      let newData = [...old.datasets]
+      newData[0].data = [...data] // [1,2,3,4,5,6,7]
+      return { ...old, datasets: newData }
+    })
+
+  }, [data])
+
+
+  return <ChartContainer>
+    <Line
+      datasetIdKey='id'
+      options={optionsChart}
+      data={dataChart}
+    />
+  </ChartContainer>
+
 }
 
 export default TheChart

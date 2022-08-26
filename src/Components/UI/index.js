@@ -29,7 +29,7 @@ export const Box = styled.div`
 export const Button = styled.button`
   margin: 15px auto 0px auto;
   display: block;
-  border-radius: 20px;
+  border-radius: 5px;
   background-color: #41d3be;
   border: none;
   color: white;
@@ -67,6 +67,7 @@ export const ContainerWrapper = styled.div`
   padding: 0px 15vw;
   display:flex;
   justify-content: center ;
+  align-items: center;
 `
 
 
@@ -136,10 +137,11 @@ export const IconeTema = styled(Icone)`
 
 
 export const Input = styled.input`
-  font-weight: 200;
+  font-weight: 300;
   font-size: normal;
   margin: 0px 0px 5px 0px;
 `
+
 
 export const Label = styled.label`
   margin: 0px 0px 5px 0px;

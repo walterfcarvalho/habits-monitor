@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react'
 import { getUserIndicators, updateDocument, getActivitysOfDay, addDocument } from '../../Firebase/api'
 import styled from 'styled-components'
 
-import { roundDate, ceilDate } from '../../util/dateTime'
+import * as dateUtil from '../../util/dateTime'
 import { Box, EmptyBox } from '../UI'
-import IMG_ADD from '../../images/add-button.png'
-import IMG_DEL from '../../images/rem-button.png'
+//import IMG_ADD from '../../images/add-button.png'
+//import IMG_DEL from '../../images/rem-button.png'
 import TailSpinContainer from '../../LoadingComponent'
 
 const H3 = styled.h3`
-color: ${({theme}) => theme.text } ;
+color: ${({ theme }) => theme.text} ;
 `
 
-const Points = styled.div`
-  background-color: ${({theme}) => theme.body };
+const Points = styled.input`
+  background-color: ${({ theme }) => theme.body};
   border-radius:5px;
   margin: 5px 10px 5px 10px;
   padding: 20px;
@@ -22,25 +22,26 @@ const Points = styled.div`
   padding: 5px;
   font-size: x-large;
   `
-  
-  const SetQuantity = styled.div`
+
+const SetQuantity = styled.div`
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   `
 
-const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
+const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
 
   const [useIndicators, setUseIndicators] = useState([])
-  const [flag, setFlag] = useState(true)
+  //const [flag, setFlag] = useState(true)
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
 
     getDataDay(dateStart)
+    //}, [dateStart, flag])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateStart, flag])
+  }, [])
 
   function deactivateIndicator(idx) {
     updateDocument('userIndicators', useIndicators[idx].userIndicator, { deleted: true })
@@ -51,32 +52,53 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
       ))
   }
 
-  function addActivity(idx, step) {
+  function setValueTodayChart() {
+    const iniValue = 0
+    let resultDia = useIndicators.reduce( (p,c) =>  p + parseInt(c.quantity) * (c.positive ? 1 : -1), iniValue)
 
-    if (useIndicators[idx].activityId) {
-      let aux = useIndicators
-
-      updateDocument('activity', aux[idx].activityId, { quantity: aux[idx].quantity + step })
-
-    } else {
-
-      addDocument('activity', {
-        indicator: useIndicators[idx].userIndicator,
-        date: dateStart,
-        quantity: 1,
-        user: JSON.parse(localStorage.getItem("habbit-monitor")).uid
-      })
-
-    }
-
-    setFlag(!flag)
+    setIndicatorsWeek( oldState => {
+      oldState[6] = resultDia
+      return [...oldState]
+    })
   }
 
 
+  function setActivity(e, idx) {
+    let quantity = parseInt(e.target.value)
+
+    if (useIndicators[idx].quantity === quantity) return
+
+    if (useIndicators[idx].activityId ) {
+      updateDocument('activity', useIndicators[idx].activityId, { quantity: quantity })
+      setValueTodayChart()
+    } else {
+      
+      addDocument('activity', {
+        indicator: useIndicators[idx].userIndicator,
+        date: dateStart,
+        quantity: quantity,
+        user: JSON.parse(localStorage.getItem("habbit-monitor")).uid
+      })
+      setValueTodayChart()
+    }
+    //setFlag(!flag)
+  }
+
+  function handleChange(e) {
+
+    setUseIndicators(indicators =>
+      indicators.map(item => item.userIndicator === e.target.id
+        ? { ...item, quantity: e.target.value }
+        : { ...item }
+      )
+    )
+
+  }
+
   async function getDataDay(date) {
     const userId = JSON.parse(localStorage.getItem("habbit-monitor")).uid
-    const dayInitial = roundDate(date) // theDate(0)
-    const dayFinal = ceilDate(date)
+    const dayInitial = dateUtil.roundDate(date) // theDate(0)
+    const dayFinal = dateUtil.ceilDate(date)
 
     setLoading(true)
 
@@ -84,16 +106,18 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
     setLoading(false)
 
+    console.log('getDataDay', day)
+
     setUseIndicators(day)
   }
 
   async function mountResume(userId, dayInitial, dayFinal) {
 
     const userIndicators = await getUserIndicators(userId)
-    
+
     let res = undefined
 
-    if (isShowPoints || isEdit) {
+    if (isEdit) {
 
       const activitysOfDay = await getActivitysOfDay(userId, dayInitial, dayFinal)
 
@@ -116,15 +140,15 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
 
   return <>
 
-    {  !isLoading && useIndicators.length === 0 && 
+    {!isLoading && useIndicators.length === 0 &&
       <EmptyBox>
-        
+
         <p> No indicators added yet </p>
 
       </EmptyBox>
     }
 
-    { isLoading && <TailSpinContainer/> }
+    {isLoading && <TailSpinContainer />}
 
     {useIndicators.length > 0 &&
       useIndicators.map((item, idx) => (
@@ -133,14 +157,6 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
           <H3>
             {item.indicator}
           </H3>
-
-          {isShowPoints &&
-            <Points>
-              <H3>
-                {item.quantity ? item.quantity : 0}
-              </H3>
-            </Points>
-          }
 
           {isShowRemove &&
             <img
@@ -153,13 +169,14 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, isShowPoints }) => {
           {isEdit &&
 
             <SetQuantity>
-              <img src={IMG_DEL} alt="remove quantity" onClick={() => addActivity(idx, -1)} />
 
-              <Points>
-                {item.quantity ? item.quantity : 0}
+              <Points
+                value={item.quantity}
+                id={item.userIndicator}
+                onChange={handleChange}
+                onBlur={(e) => setActivity(e, idx) }
+              >
               </Points>
-
-              <img src={IMG_ADD}  alt="add quantity" onClick={() => addActivity(idx, +1)} />
 
             </SetQuantity>
           }

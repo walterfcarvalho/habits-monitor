@@ -10,7 +10,7 @@ import TailSpinContainer from '../../LoadingComponent'
 
 
 const Dasboard = ({ theTheme, setTheme}) => {
-  const [incatorsWeek, setIndicatorsWeek] = useState()
+  const [indicatorsWeek, setIndicatorsWeek] = useState()
 
   useEffect(() => {
     getDataWeek()
@@ -28,7 +28,7 @@ const Dasboard = ({ theTheme, setTheme}) => {
       let info = await mountResume(userId, theDate(-i), theDate(-i + 1))
       
       dataWeek.push(
-        info.reduce((prev, curr) => prev + curr.quantity * (curr.positive ? 1 : -1), 0)
+        info.reduce((prev, curr) => prev + parseInt(curr.quantity) * (curr.positive ? 1 : -1), 0)
       )
     }
     setIndicatorsWeek(dataWeek)
@@ -55,6 +55,13 @@ const Dasboard = ({ theTheme, setTheme}) => {
   return <>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+    {  indicatorsWeek !== undefined &&
+
+      indicatorsWeek.map ( i => `${i} ` )
+
+    }
+
+
     <StyledHeader 
       theTheme={theTheme}
       setTheme={setTheme}
@@ -63,13 +70,13 @@ const Dasboard = ({ theTheme, setTheme}) => {
 
     <ActList>
 
-      { !incatorsWeek &&
+      { !indicatorsWeek &&
         <TailSpinContainer />
       }
 
-      {incatorsWeek &&
+      {indicatorsWeek &&
         <TheChart
-          data={incatorsWeek}
+          data={indicatorsWeek}
           labels={lastSevenDays()}
           title={'Last 7 days activities'}
         >
@@ -84,9 +91,12 @@ const Dasboard = ({ theTheme, setTheme}) => {
       <Indicators
         dateStart={ new Date() }
         isShowPoints={true}
-        isEdit={false}
-        isShowRemove={false}
+        isEdit={true}
+        setIndicatorsWeek={setIndicatorsWeek}
       />
+
+
+
     </ActList>
   </>
 }
@@ -105,4 +115,18 @@ activity
 date
 quantity
 user 
+
+
+{ activityId: "mYsonOnrpjac5vHrGM1r"
+  date: Thu Aug 25 2022 00:00:00 GMT+0100 (Irish Standard Time) {}
+  deleted: false
+  indicator: "Fazer refeição plena"
+  metricType: "Units"
+  positive: true
+  quantity: "12"
+  target: 1
+  user: "qtLQLiRqtFcbrqUu8zOnPsfEuPv2"
+  userIndicator: "8ZAXSv1SUtRnwpVCKD0e"
+}
+
 */

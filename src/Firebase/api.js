@@ -2,12 +2,25 @@ import { initializeApp } from 'firebase/app';
 //import { collection, query, where, getDocs } from "firebase/firestore";
 import { firebaseConfig } from './config'
 import { getFirestore, collection, query, where, getDocs, Timestamp, doc, updateDoc, addDoc } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+
+export const signOutGoogle = () => {
+  const auth = getAuth()
+  
+  signOut(auth).then(()=>{
+    console.log('ok')
+  })
+  .catch((error) => { 
+    console.log(error)
+  })
+}
+
 export const addDocument = async (theCollection, obj) => {
-  return  await addDoc(collection(db, theCollection), obj);
+  return await addDoc(collection(db, theCollection), obj);
 }
 
 export const getUserIndicators = async (userId) => {
@@ -20,8 +33,8 @@ export const getUserIndicators = async (userId) => {
 
   const querySnapshot = await getDocs(q)
 
-  querySnapshot.forEach( doc => {    
-    data.push({userIndicator:doc.id, ...doc.data()})
+  querySnapshot.forEach(doc => {
+    data.push({ userIndicator: doc.id, ...doc.data() })
   })
 
   //console.log('getUserIndicators', data)
@@ -30,7 +43,7 @@ export const getUserIndicators = async (userId) => {
 }
 
 export const getActivitysOfDay = async (userId, dayStart, dayEnd) => {
- 
+
   const dataResume = []
 
   const q = query(collection(db, "activity")
@@ -41,14 +54,12 @@ export const getActivitysOfDay = async (userId, dayStart, dayEnd) => {
 
   const querySnapshot = await getDocs(q)
 
-  querySnapshot.forEach(doc => dataResume.push({id:doc.id, ...doc.data()}))
-
-  // console.log('getActivitysOfDay ', dayStart, dayEnd, dataResume)
+  querySnapshot.forEach(doc => dataResume.push({ id: doc.id, ...doc.data() }))
 
   return dataResume
 }
 
 export const updateDocument = (collection, id, value) => {
-  const aux = doc(db, collection, id) 
-  return updateDoc(aux, value) 
+  const aux = doc(db, collection, id)
+  return updateDoc(aux, value)
 }

@@ -2,6 +2,8 @@
 import styled from 'styled-components'
 import React, { useState, useRef } from "react"
 import { useNavigate } from 'react-router-dom'
+import { signOutGoogle } from '../../Firebase/api'
+import * as Styled from '../UI'
 
 
 const StyledMenu = styled.nav`
@@ -47,29 +49,30 @@ const Menu = ({ open }) => {
   const navigate = useNavigate()
 
   const logout = () => {
+    signOutGoogle()
+
+
     localStorage.clear()
-    navigate("/login")  
+    navigate("/login")
   }
 
 
   return <StyledMenu open={open} >
-      <a href="" onClick={() => navigate("/dashboard")}  >
-        <span role="img" aria-label="My indicators"></span>
-        Dashboard
-      </a>
-      <a href="" onClick={() => navigate("/userindicators")}  >
-        <span role="img" aria-label="My indicators"></span>
-        My indicators
-      </a>
-      <a href="" onClick={() => navigate("/activities")}  >
-        <span role="img" aria-label="My indicators"></span>
-        Activities
-      </a>
-      <a href="" onClick={() => logout() }  >
-        <span role="img" aria-label="Logout"></span>
-        Logout
-      </a>
-    </StyledMenu>
+
+    <Styled.BtnCabecalho onClick={() => navigate("/dashboard")}>
+      Dashboard
+    </Styled.BtnCabecalho>
+    <Styled.BtnCabecalho onClick={() => navigate("/userindicators")}>
+      My indicators
+    </Styled.BtnCabecalho>
+    <Styled.BtnCabecalho onClick={() => navigate("/activities")}>
+      My activities
+    </Styled.BtnCabecalho>
+    <Styled.BtnCabecalho onClick={() => logout()}>
+      Logout
+    </Styled.BtnCabecalho>
+
+  </StyledMenu>
 }
 
 const StyledBurger = styled.button`
@@ -136,7 +139,7 @@ const SiderBar = () => {
         <Menu open={open} setOpen={setOpen} />
       </div>
     </div>
-  )  
+  )
 }
 
 export default SiderBar
