@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { ContainerWrapper, Button, Label, Span, Input, Field, Form, EmptyBox } from '../UI'
 import loginGoogleBanner from '../../images/logingoogle.png'
+import LoadingComponent from '../../LoadingComponent'
 
 
 
@@ -63,6 +64,9 @@ const Login = () => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
+
+
+        { isLoading && <LoadingComponent/>}
 
         <TbHeartRateMonitor size={'70px'} />
 

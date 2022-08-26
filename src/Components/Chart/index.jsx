@@ -5,8 +5,6 @@ import { ChartContainer } from './styles'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
-
-
 const TheChart = ({ data, labels, title }) => {
 
   const [dataChart, setDataChart] = useState({
@@ -21,7 +19,7 @@ const TheChart = ({ data, labels, title }) => {
     ]
   })
 
-  const [optionsChart, setOptionsChart] = useState({
+  const [optionsChart] = useState({
     maintainAspectRatio: false,
     plugins: {
       legend: {
@@ -39,10 +37,11 @@ const TheChart = ({ data, labels, title }) => {
     setDataChart(old => {
       console.log(data)
       let newData = [...old.datasets]
-      newData[0].data = [...data] // [1,2,3,4,5,6,7]
+      newData[0].data = [...data]
       return { ...old, datasets: newData }
     })
 
+    // eslint-disable-next-line
   }, [data])
 
 

@@ -4,8 +4,6 @@ import styled from 'styled-components'
 
 import * as dateUtil from '../../util/dateTime'
 import { Box, EmptyBox } from '../UI'
-//import IMG_ADD from '../../images/add-button.png'
-//import IMG_DEL from '../../images/rem-button.png'
 import TailSpinContainer from '../../LoadingComponent'
 
 const H3 = styled.h3`
@@ -33,15 +31,12 @@ const SetQuantity = styled.div`
 const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
 
   const [useIndicators, setUseIndicators] = useState([])
-  //const [flag, setFlag] = useState(true)
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-
     getDataDay(dateStart)
-    //}, [dateStart, flag])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line
+  }, [dateStart])
 
   function deactivateIndicator(idx) {
     updateDocument('userIndicators', useIndicators[idx].userIndicator, { deleted: true })
@@ -70,7 +65,6 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
 
     if (useIndicators[idx].activityId ) {
       updateDocument('activity', useIndicators[idx].activityId, { quantity: quantity })
-      setValueTodayChart()
     } else {
       
       addDocument('activity', {
@@ -79,9 +73,11 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
         quantity: quantity,
         user: JSON.parse(localStorage.getItem("habbit-monitor")).uid
       })
-      setValueTodayChart()
+
+      getDataDay(dateStart)
+
     }
-    //setFlag(!flag)
+    setValueTodayChart()
   }
 
   function handleChange(e) {
