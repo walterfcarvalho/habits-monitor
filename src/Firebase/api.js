@@ -11,12 +11,8 @@ const db = getFirestore(app);
 export const signOutGoogle = () => {
   const auth = getAuth()
   
-  signOut(auth).then(()=>{
-    console.log('ok')
-  })
-  .catch((error) => { 
-    console.log(error)
-  })
+  signOut(auth)
+  .then(() => localStorage.clear())
 }
 
 export const addDocument = async (theCollection, obj) => {
@@ -36,8 +32,6 @@ export const getUserIndicators = async (userId) => {
   querySnapshot.forEach(doc => {
     data.push({ userIndicator: doc.id, ...doc.data() })
   })
-
-  //console.log('getUserIndicators', data)
 
   return data
 }

@@ -102,8 +102,6 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
 
     setLoading(false)
 
-    console.log('getDataDay', day)
-
     setUseIndicators(day)
   }
 
@@ -165,15 +163,16 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
           {isEdit &&
 
             <SetQuantity>
-
               <Points
+                type="number"
+                minValue="0"
+                maxValue="9"
                 value={item.quantity}
                 id={item.userIndicator}
                 onChange={handleChange}
                 onBlur={(e) => setActivity(e, idx) }
               >
               </Points>
-
             </SetQuantity>
           }
 

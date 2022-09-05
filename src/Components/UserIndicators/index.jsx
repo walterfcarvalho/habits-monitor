@@ -70,7 +70,6 @@ const UserIndicators = ({ theTheme, setTheme }) => {
               Indicator description
             </S.Label>
             <S.Input
-              onChange={console.log('change')}
               autoFocus={true}
               placeholder=""
               {...register('description', {

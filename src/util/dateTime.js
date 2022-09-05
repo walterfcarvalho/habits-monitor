@@ -5,8 +5,6 @@ export const theDate = (daysToAdvance = 0) => {
 
   let res = new Date( aux.getFullYear(), aux.getMonth(), aux.getDate(), 0, 0, 0, 0)
 
-//  console.log(`theDate(${daysToAdvance}) result ${res}` )
-
   return res
 }
 
@@ -31,7 +29,6 @@ export const lastSevenDays = (theDate = new Date()) => {
       aux.getDate().toString().padStart(2, '0') 
     )
     aux = new Date( + aux - 1 * 86400000 )
-    // console.log(aux)
   }
   return result.sort( (a, b) => a > b ? 1 : -1)
 }

@@ -1,9 +1,16 @@
+import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import { ChartContainer } from './styles'
+// import { ChartContainer } from './styles'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
+
+const ChartContainer = styled.div`
+    margin: auto;
+    height: 30vh;
+    width: 80vw;
+`
 
 const TheChart = ({ data, labels, title }) => {
 
@@ -35,12 +42,10 @@ const TheChart = ({ data, labels, title }) => {
 
   useEffect(() => {
     setDataChart(old => {
-      console.log(data)
       let newData = [...old.datasets]
       newData[0].data = [...data]
       return { ...old, datasets: newData }
     })
-
     // eslint-disable-next-line
   }, [data])
 

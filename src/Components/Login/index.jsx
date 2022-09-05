@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import { TbHeartRateMonitor} from 'react-icons/tb'
+import { TbHeartRateMonitor } from 'react-icons/tb'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { ContainerWrapper, Button, Label, Span, Input, Field, Form, EmptyBox } from '../UI'
@@ -23,7 +23,6 @@ const Login = () => {
       .then((result) => {
 
         if (result !== null) {
-          setIsLoading(true)
 
           localStorage.setItem("habbit-monitor", JSON.stringify(result.user))
 
@@ -35,12 +34,15 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const loga = () => {
+  const loginWithGoogle = () => {
     setIsLoading(true)
 
     const provider = new GoogleAuthProvider();
 
-    signInWithRedirect(auth, provider).then(res => console.log('login com redirect'))
+    signInWithRedirect(auth, provider)
+    .catch((error) => { 
+      setLoginError(error.message)
+    })
   }
 
 
@@ -65,9 +67,6 @@ const Login = () => {
 
       <Form onSubmit={handleSubmit(onSubmit)}>
 
-
-        { isLoading && <LoadingComponent/>}
-
         <TbHeartRateMonitor size={'70px'} />
 
         <Field>
@@ -75,7 +74,7 @@ const Login = () => {
             htmlFor="firstName">Email
           </Label>
           <Input
-            onChange={setLoginError}
+            onChange={() => setLoginError("")}
             autoFocus={true}
             placeholder=""
             {...register('email', {
@@ -103,7 +102,10 @@ const Login = () => {
           {errors.password && errors.password.message}
         </Field>
 
-        {loginError}
+        <Span> 
+          {loginError}
+        </Span>
+
 
         <Field>
           <Button primary type="submit" value={"go"} > Go </Button>
@@ -114,7 +116,7 @@ const Login = () => {
               style={{ width: "100%" }}
               src={loginGoogleBanner}
               alt="banner login with google"
-              onClick={loga}
+              onClick={loginWithGoogle}
             />
           </EmptyBox>
       </Form>
