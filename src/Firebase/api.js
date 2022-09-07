@@ -1,23 +1,24 @@
 import { initializeApp } from 'firebase/app';
-//import { collection, query, where, getDocs } from "firebase/firestore";
 import { firebaseConfig } from './config'
-import { getFirestore, collection, query, where, getDocs, Timestamp, doc, updateDoc, addDoc } from "firebase/firestore";
-import { getAuth, signOut } from "firebase/auth";
+import {  getFirestore, collection, query,
+          where, getDocs, Timestamp, doc, updateDoc, addDoc } from "firebase/firestore";
+import { getAuth, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-export const signOutGoogle = () => {
-  const auth = getAuth()
-  
-  signOut(auth)
-  .then(() => localStorage.clear())
-}
-
 export const addDocument = async (theCollection, obj) => {
   return await addDoc(collection(db, theCollection), obj);
 }
+
+
+export const addUser = (userData) => {
+  const auth = getAuth()
+
+  return createUserWithEmailAndPassword(auth, userData.user, userData.password)
+}
+
 
 export const getUserIndicators = async (userId) => {
   const data = []
@@ -52,6 +53,15 @@ export const getActivitysOfDay = async (userId, dayStart, dayEnd) => {
 
   return dataResume
 }
+
+
+export const signOutGoogle = () => {
+  const auth = getAuth()
+  
+  signOut(auth)
+  .then(() => localStorage.clear())
+}
+
 
 export const updateDocument = (collection, id, value) => {
   const aux = doc(db, collection, id)

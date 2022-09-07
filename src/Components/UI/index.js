@@ -1,24 +1,24 @@
 import styled from 'styled-components'
 
 export const ActList = styled.div`
+  align-items: center;
+  background-color: ${({theme}) => theme.body };
   display:flex;
   flex-direction: column;
-  align-items: center;
   text-align:center;
-  background-color: ${({theme}) => theme.body };
 `
 
 export const Box = styled.div`
-  margin:5px;
+  align-items:center;
+  background-color: ${(props) => props.positive ? '#cbe3ac' : '#f0988b'};
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items:center;
-  border-radius: 5px;
-  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  margin:5px;
   padding: 20px;
   width: 60%;
-  background-color: ${(props) => props.positive ? '#cbe3ac' : '#f0988b'};
 
   @media (max-width: 800px) {
     width: 95%;
@@ -27,16 +27,16 @@ export const Box = styled.div`
 `
 
 export const Button = styled.button`
-  margin: 15px auto 0px auto;
-  display: block;
-  border-radius: 5px;
   background-color: #41d3be;
   border: none;
+  border-radius: 5px;
   color: white;
+  cursor: pointer;
+  display: block;
   font-weight: 600;
   font-size: 14px;
+  margin: 15px auto 0px auto;
   padding: 8px 20px;
-  cursor: pointer;
 `
 
 export const BtnCabecalho = styled.a`
@@ -52,12 +52,12 @@ export const BtnCabecalho = styled.a`
 
 
 export const BtnTema = styled.button`
-  position:absolute;
-  top:4vh;
-  right: 20px;
   background-color: inherit ;
   border:none;
   cursor:pointer;
+  position:absolute;
+  right: 20px;
+  top:4vh;
 `
 
 
@@ -72,33 +72,52 @@ export const ContainerWrapper = styled.div`
 
 
 export const EmptyBox = styled.div`
-  margin:5px;
+  align-items:center;
+  background-color: ${(theme) => theme.body};
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items:center;
-  border-radius: 5px;
-  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  margin: 20px 5px 20px 5px;
   padding: 20px;
   width: 60%;
-  background-color: ${(theme) => theme.body};
-  margin: 20px 5px 20px 5px;
 
   @media (max-width: 800px) {
-    width: 95%;
     margin: 5px;
+    width: 95%;
   }
 `
 
-export const Field = styled.div`
-  //  flex-grow: 2; 
+export const EmptyColorBox = styled.div`
+  align-items:center;
+  background-color: ${(props) => props.backgroundColor ? props.backgroundColor : "white"};
+  border-radius: 5px;
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
   display: flex;
-  flex-direction:  ${(props) => props.direction ? props.direction : "column"};
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 5px 20px 5px;
+  padding: 20px;
+  width: 60%;
+  
+  @media (max-width: 800px) {
+    margin: 5px;
+    width: 95%;
+  }
+`
+
+
+export const Field = styled.div`
+  display: flex;
+  flex-direction: ${(props) => props.direction ? props.direction : "column"};
   padding: 0px;
   margin: 5px;
   width: 100%;
   background-color: ${(theme => theme.body)};
+  justify-content: space-between;
 `
+
 
 export const FieldError = styled.span`
   color: red;
@@ -152,7 +171,7 @@ export const Label = styled.label`
 
 export const Span = styled.span`
   text-align: left;
-  width: 50%;
+  width: 100%;
   color: ${({theme})=> theme.text};
 `
 

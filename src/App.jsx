@@ -11,7 +11,7 @@ import LockedRoute from './Components/ProtectedRoute/Index'
 import Login from './Components/Login'
 import UserIndicators from './Components/UserIndicators/index.jsx'
 import Activities from './Components/Activities'
-
+import NewUser from  './Components/NewUser'
 
 const App = () => {
 
@@ -26,13 +26,15 @@ const App = () => {
     <GlobalStyle />
 
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/activities" element={<LockedRoute child={<Activities theTheme={theTheme} setTheme={handleTheme} />} />} />
 
         <Route path="/dashboard" element={<LockedRoute child={<Dasboard theTheme={theTheme} setTheme={handleTheme} />} />} />
 
-        <Route path="/userindicators" element={<LockedRoute child={<UserIndicators theTheme={theTheme} setTheme={handleTheme} />} />} />
+        <Route path="/login" element={<Login />} />
 
-        <Route path="/activities" element={<LockedRoute child={<Activities theTheme={theTheme} setTheme={handleTheme} />} />} />
+        <Route path="/newuser" element={<NewUser />} />
+
+        <Route path="/userindicators" element={<LockedRoute child={<UserIndicators theTheme={theTheme} setTheme={handleTheme} />} />} />
 
         <Route path="*" element={<Login />} />
       </Routes>

@@ -7,9 +7,11 @@ import { Line } from 'react-chartjs-2'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 const ChartContainer = styled.div`
-    margin: auto;
-    height: 30vh;
-    width: 80vw;
+  background-color: white;
+  margin: auto;
+  height: 30vh;
+  width: 80vw;
+  border-radius: 0px 0px 5px 5px;
 `
 
 const TheChart = ({ data, labels, title }) => {
@@ -20,8 +22,8 @@ const TheChart = ({ data, labels, title }) => {
       {
         label: '',
         data: data,
-        borderColor: 'violet',
-        backgroundColor: 'violet',
+        borderColor: 'black',
+        backgroundColor: 'black',
       }
     ]
   })
@@ -57,7 +59,6 @@ const TheChart = ({ data, labels, title }) => {
       data={dataChart}
     />
   </ChartContainer>
-
 }
 
 export default TheChart

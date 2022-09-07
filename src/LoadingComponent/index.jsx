@@ -5,12 +5,12 @@ const TailSpinContainer = styled.div`
   margin: 20px 5px 20px 5px;
 `
 
-const LoadingComponent = () => {
+const LoadingComponent = ({size}) => {
 
   return <TailSpinContainer>
     <TailSpin
-      height="80"
-      width="80"
+      height={size ? size : "80"}
+      width={size ? size : "80"}
       color="#4fa94d"
       ariaLabel="tail-spin-loading"
       radius="1"

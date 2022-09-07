@@ -6,13 +6,11 @@ import { Icone } from '../UI'
 
 const Switcher = ({theTheme, setTheme}) => {
 
-  return (
-    <Icone 
+  return <Icone 
       src={theTheme ? ThemeOn : ThemeOff } 
       alt= "Tema Claro"
       onClick = {() => setTheme() }  
     />
-  )
 }
 
 export default Switcher
