@@ -12,6 +12,7 @@ import Login from './Components/Login'
 import UserIndicators from './Components/UserIndicators/index.jsx'
 import Activities from './Components/Activities'
 import NewUser from  './Components/NewUser'
+import ResetPassword from './Components/ResetPassword'
 
 const App = () => {
 
@@ -33,6 +34,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
 
         <Route path="/newuser" element={<NewUser />} />
+
+        <Route path="/resetpassword" element={<ResetPassword />} />
 
         <Route path="/userindicators" element={<LockedRoute child={<UserIndicators theTheme={theTheme} setTheme={handleTheme} />} />} />
 

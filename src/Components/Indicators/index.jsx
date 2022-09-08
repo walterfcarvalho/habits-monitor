@@ -137,7 +137,7 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
     {!isLoading && useIndicators.length === 0 &&
       <EmptyBox>
 
-        <p> No indicators added yet </p>
+        <p> No indicators added yet, go to  "My indicators" to add one indicator </p>
 
       </EmptyBox>
     }

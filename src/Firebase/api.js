@@ -2,7 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './config'
 import {  getFirestore, collection, query,
           where, getDocs, Timestamp, doc, updateDoc, addDoc } from "firebase/firestore";
-import { getAuth, signOut, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, 
+         sendPasswordResetEmail } from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -17,6 +18,11 @@ export const addUser = (userData) => {
   const auth = getAuth()
 
   return createUserWithEmailAndPassword(auth, userData.user, userData.password)
+}
+
+
+export const callResetPassword = (email) => {
+  return sendPasswordResetEmail( getAuth(), email )
 }
 
 
