@@ -3,10 +3,12 @@ conteudoClaro,
 textoFundoClaro,
 fundoEscuro,
 conteudoEscuro,
-textoFundoEscuro  
+textoFundoEscuro,
+corPrimaria  
 } from './variables'
 
 export const temaClaro = {
+  primaryColor:corPrimaria,
   body : fundoClaro,
   inside: conteudoClaro,
   text:textoFundoClaro,
@@ -15,6 +17,7 @@ export const temaClaro = {
 }
 
 export const temaEscuro = {
+  primaryColor:corPrimaria,
   body : fundoEscuro,
   inside: conteudoEscuro,
   text: textoFundoEscuro,

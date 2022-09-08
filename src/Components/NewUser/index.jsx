@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import * as firebase from '../../Firebase/api'
 import LoadingComponent from '../../LoadingComponent'
+import Logo from '../Logo'
 import * as UI from '../UI'
 import * as colors from '../UI/variables'
 
 
 const NewUser = () => {
-  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
+  const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const [error, setError] = useState("")
   const [isSucces, setIsSucces] = useState(false)
   const navigate = useNavigate()
@@ -35,6 +36,8 @@ const NewUser = () => {
 
       {!isSucces &&
         <>
+          <Logo msg="New user"/>
+
           <UI.Field primary>
             <UI.Label htmlFor="email">
               E-mail

@@ -32,7 +32,6 @@
     "react-app-rewired": "^2.2.1"
   },
   "scripts": {
-    "xstart": "react-scripts start",
     "start": "react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
