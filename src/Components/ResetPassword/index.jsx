@@ -64,7 +64,7 @@ const ResetPassword = () => {
         }
 
         <UI.Field direction={"row"} >
-          <Link style={{ color: colors.corPrimaria }} to="/login"> Back to login </Link>
+          <Link style={{ color: colors.corPrimaria }} to="/login"> Login </Link>
           <Link style={{ color: colors.corPrimaria }} to="/newuser"> New user </Link>
         </UI.Field>
 

@@ -108,7 +108,7 @@ const NewUser = () => {
 
           <UI.Field direction={"row"} >
             <Link style={{ color: colors.corPrimaria }} to="/login"> Login </Link>
-            <Link style={{ color: colors.corPrimaria }} to="/forgotpassword"> Forgot password </Link>
+            <Link style={{ color: colors.corPrimaria }} to="/resetpassword"> Forgot password </Link>
           </UI.Field>
         </>
       }
