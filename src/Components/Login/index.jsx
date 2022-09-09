@@ -64,7 +64,7 @@ const Login = () => {
 
       <UI.Form onSubmit={handleSubmit(onSubmit)}>
 
-        <Logo msg="Habit-Monitor"/>
+        <Logo msg="Habits-Monitor"/>
 
         <UI.Field>
           <UI.Label primary
