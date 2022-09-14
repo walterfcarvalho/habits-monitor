@@ -62,6 +62,8 @@ const Indicators = ({ dateStart, isShowRemove, isEdit, setIndicatorsWeek }) => {
   function setActivity(e, idx) {
     let quantity = parseInt(e.target.value)
 
+    if (isNaN(quantity)) quantity = 0
+
     if (useIndicators[idx].quantity === quantity) return
 
     if (useIndicators[idx].activityId) {
