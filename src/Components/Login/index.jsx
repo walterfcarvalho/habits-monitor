@@ -16,6 +16,12 @@ const Login = () => {
   const auth = getAuth()
 
   useEffect(() => {
+
+    if (JSON.parse(localStorage.getItem("habbit-monitor"))?.uid) {
+      setTimeout( () => navigate("/dashboard"), 1000 )
+      
+    }
+
     getRedirectResult(auth)
       .then((result) => {
 
