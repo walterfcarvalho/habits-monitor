@@ -3,9 +3,13 @@ import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import { setPersistence, browserSessionPersistence } from "firebase/auth";
 import * as UI from '../UI'
 import loginGoogleBanner from '../../images/logingoogle.png'
 import * as colors from '../UI/variables'
+import { AiFillGithub } from 'react-icons/ai'
+
+
 import Logo from '../Logo'
 
 const Login = () => {
@@ -14,32 +18,39 @@ const Login = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const [loginError, setLoginError] = useState()
   const auth = getAuth()
+  const provider = new GoogleAuthProvider();
+
 
   useEffect(() => {
 
     if (JSON.parse(localStorage.getItem("habbit-monitor"))?.uid) {
-      setTimeout( () => navigate("/dashboard"), 1000 )
-      
+      setTimeout( () => {
+        navigate("/dashboard")
+      }, 10 )      
     }
 
+    setPersistence(auth, browserSessionPersistence	)
+
     getRedirectResult(auth)
-      .then((result) => {
-
-        if (result !== null) {
-
-          localStorage.setItem("habbit-monitor", JSON.stringify(result.user))
-
-          navigate("/dashboard")
-        }
-      }).catch((error) => {
-        setLoginError(error.message)
-      })
+    .then((result) => {
+      
+      console.log("getredirect =>", result)
+      
+      if (result !== null) {
+        localStorage.setItem("habbit-monitor", JSON.stringify(result.user))
+        console.log("getredirect")
+        navigate("/dashboard")
+      }
+    }).catch((error) => {
+      console(error)
+      setLoginError(error.message)
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
   const loginWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
+//    const provider = new GoogleAuthProvider();
 
     signInWithRedirect(auth, provider)
       .catch((error) => {
@@ -113,6 +124,12 @@ const Login = () => {
           <UI.Button primary type="submit" value={"go"} > Go </UI.Button>
         </UI.Field>
 
+        <UI.DivOr>
+          <UI.Hr />
+            Or
+          <UI.Hr />
+        </UI.DivOr>     
+
         <UI.EmptyBox>
           <img
             style={{ width: "100%" }}
@@ -128,7 +145,12 @@ const Login = () => {
         </UI.Field>
       </UI.Form>
 
+
     </UI.ContainerWrapper>
+      <UI.Footer>
+        <AiFillGithub  size={'30px'} />
+        <UI.A href="https://github.com/walterfcarvalho/habits-monitor/">Github source</UI.A>
+      </UI.Footer>
   </>
 }
 

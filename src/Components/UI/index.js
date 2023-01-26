@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+export const A = styled.a `
+  color: black;
+`
+
+
 export const ActList = styled.div`
   align-items: center;
   background-color: ${({theme}) => theme.body };
@@ -7,6 +12,7 @@ export const ActList = styled.div`
   flex-direction: column;
   text-align:center;
 `
+
 
 export const Box = styled.div`
   align-items:center;
@@ -26,6 +32,7 @@ export const Box = styled.div`
   }
 `
 
+
 export const Button = styled.button`
   background-color: #41d3be;
   border: none;
@@ -38,6 +45,7 @@ export const Button = styled.button`
   margin: 15px auto 0px auto;
   padding: 8px 20px;
 `
+
 
 export const BtnCabecalho = styled.a`
   text-align: center;
@@ -62,12 +70,9 @@ export const BtnTema = styled.button`
 
 
 export const ContainerWrapper = styled.div`
-  background-color: '#F1F1F1';
-  min-height: 100vh;
-  padding: 0px 15vw;
+  padding: 1em 1em;
   display:flex;
   justify-content: center ;
-  align-items: center;
 `
 
 
@@ -108,6 +113,23 @@ export const EmptyColorBox = styled.div`
 `
 
 
+export const DivOr = styled.div`
+  padding: .5em;
+  margin: 0;
+  /* height: 100%; */
+  display: flex;
+  flex:1;
+  align-items:center;
+
+`
+export const Hr = styled.hr `
+  flex-grow: 1;
+  margin: 2em;
+  padding: 0;
+  width: 50px;
+`
+
+
 export const Field = styled.div`
   display: flex;
   flex-direction: ${(props) => props.direction ? props.direction : "column"};
@@ -136,13 +158,24 @@ export const Form = styled.form`
   width: 50%;
   height: 40%;
   padding: 10px;
-
+  
   @media (max-width: 800px) {
     width: 100%;
     margin: 5px;
   }
 `
 
+
+export const Footer = styled.footer`
+  background-color: #41D3BE;
+  position: absolute;
+  height: 8vh;
+  width: 100%;
+  bottom:0px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export const Icone = styled.img`
   height: 25px;
@@ -157,7 +190,7 @@ export const IconeTema = styled(Icone)`
 
 export const Input = styled.input`
   font-weight: 300;
-  font-size: normal;
+  font-size: 24px;
   margin: 0px 0px 5px 0px;
 `
 
@@ -165,7 +198,6 @@ export const Input = styled.input`
 export const Label = styled.label`
   margin: 0px 0px 5px 0px;
   color: ${(theme) => theme.fontColor};
-  // color: blue;
 `
 
 
@@ -174,6 +206,7 @@ export const Span = styled.span`
   width: 100%;
   color: ${({theme})=> theme.text};
 `
+
 
 export const Saldo = styled.div`  
   font-weight: 700;

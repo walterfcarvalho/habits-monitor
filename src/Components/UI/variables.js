@@ -1,11 +1,11 @@
 
-export const corPrimaria = "#41d3be"
+export const corPrimaria = "#41D3BE"
 
-export const fundoClaro  = "#f1f1f1"
-export const conteudoClaro = "white"
-export const textoFundoClaro = "grey31"
+export const fundoClaro  = "#F1F1F1"
+export const conteudoClaro = "WHITE"
+export const textoFundoClaro = "GREY31"
 
 
-export const fundoEscuro = "#5c5b5e"
-export const conteudoEscuro = "white"
-export const textoFundoEscuro = "#f5f5f5"
+export const fundoEscuro = "#5C5B5E"
+export const conteudoEscuro = "WHITE"
+export const textoFundoEscuro = "#F5F5F5"
