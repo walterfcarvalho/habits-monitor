@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
-import { setPersistence, browserSessionPersistence } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, 
+        signInWithRedirect, getRedirectResult, GoogleAuthProvider,
+        setPersistence, browserSessionPersistence, 
+        signInWithPopup } from "firebase/auth";
 import * as UI from '../UI'
 import loginGoogleBanner from '../../images/logingoogle.png'
 import * as colors from '../UI/variables'
@@ -15,25 +16,25 @@ import Logo from '../Logo'
 const Login = () => {
   const navigate = useNavigate()
   // eslint-disable-next-line
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
   const [loginError, setLoginError] = useState()
-  const auth = getAuth()
-  const provider = new GoogleAuthProvider();
-
-
+  
   useEffect(() => {
-
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth()
+    
     if (JSON.parse(localStorage.getItem("habbit-monitor"))?.uid) {
       setTimeout( () => {
         navigate("/dashboard")
       }, 10 )      
     }
-
-    setPersistence(auth, browserSessionPersistence	)
-
-    getRedirectResult(auth)
+    
+    setPersistence(auth, browserSessionPersistence)
+    
+    const redirectAuth = getAuth()
+    getRedirectResult(redirectAuth)
     .then((result) => {
-      
+      console.log( window.innerWidth)
       console.log("getredirect =>", result)
       
       if (result !== null) {
@@ -49,13 +50,28 @@ const Login = () => {
   }, [])
 
 
-  const loginWithGoogle = () => {
-//    const provider = new GoogleAuthProvider();
+  const loginWithGoogle = async () => {
 
-    signInWithRedirect(auth, provider)
-      .catch((error) => {
-        setLoginError(error.message)
-      })
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth()
+
+    if (window.innerWidth < 0) {
+      const userCred = await signInWithPopup(auth, new GoogleAuthProvider());
+
+      console.log(userCred);
+
+      
+    } else { 
+  
+      signInWithRedirect(auth, provider)
+        .catch((error) => {
+          setLoginError(error.message)
+        })
+    }
+
+
+
+
   }
 
 
